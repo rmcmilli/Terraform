@@ -1,7 +1,7 @@
 # Configure the Docker provider
-provider "docker" {
-    host = "tcp://127.0.0.1:2376"
-}
+#provider "docker" {
+#    host = "tcp://127.0.0.1:2376"
+#}
 
 # Create single ceos containter
 resource "docker_container" "ceos_test" {
