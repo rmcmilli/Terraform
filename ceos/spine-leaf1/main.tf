@@ -9,6 +9,28 @@ resource "docker_container" "ceos_test" {
   name = "ceos_test"
   #hostname = "ceos_test"
   attach = "true"
-  env = ["container=docker","CEOS=1","EOS_PLATFORM=ceossim","SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1","ETBA=1","INTFTYPE=eth"]
+  env = ["container=docker","CEOS=1","EOS_PLATFORM=ceoslab","SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1","ETBA=1","INTFTYPE=eth"]
   command = ["/sbin/init","Cli"]
+  privileged = "true"
+  networks_advanced {
+      name = "net1"
+  } 
+  networks_advanced {
+      name = "net2"
+  }
+  networks_advanced {
+      name = "net3"
+  }
 }
+
+resource "docker_network" "net1" {
+  name = "net1"
+}
+
+resource "docker_network" "net2" {
+  name = "net2"
+}
+resource "docker_network" "net3" {
+  name = "net3"
+}
+
