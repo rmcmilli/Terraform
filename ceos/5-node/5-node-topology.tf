@@ -13,6 +13,7 @@ resource "docker_container" "spine-1" {
   command = ["/sbin/init"]
   privileged = "true"
   start = "true"
+  restart = "always"
   networks_advanced {
       name = "eth0"
   } 
@@ -35,6 +36,7 @@ resource "docker_container" "spine-2" {
   command = ["/sbin/init"]
   privileged = "true"
   start = "true"
+  restart = "always"
   networks_advanced {
       name = "eth0"
   } 
@@ -57,6 +59,7 @@ resource "docker_container" "leaf-1" {
   command = ["/sbin/init"]
   privileged = "true"
   start = "true"
+  restart = "always"
   networks_advanced {
       name = "eth0"
   } 
@@ -76,6 +79,7 @@ resource "docker_container" "leaf-2" {
   command = ["/sbin/init"]
   privileged = "true"
   start = "true"
+  restart = "always"
   networks_advanced {
       name = "eth0"
   } 
@@ -95,6 +99,7 @@ resource "docker_container" "leaf-3" {
   command = ["/sbin/init"]
   privileged = "true"
   start = "true"
+  restart = "always"
   networks_advanced {
       name = "eth0"
   } 
