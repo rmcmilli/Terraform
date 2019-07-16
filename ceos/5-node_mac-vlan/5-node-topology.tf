@@ -77,6 +77,15 @@ resource "docker_container" "leaf-1" {
   networks_advanced {
       name = "eth4"
   }
+  networks_advanced{
+      name = "eth7"
+  }
+  networks_advanced{
+      name = "eth8"
+  }
+  networks_advanced{
+      name = "eth9"
+  }
   upload {
       content = "${file("${path.module}/configs/Leaf-1.conf")}"
       file = "/mnt/flash/startup-config"
@@ -100,6 +109,15 @@ resource "docker_container" "leaf-2" {
   }
   networks_advanced {
       name = "eth5"
+  }
+  networks_advanced {
+      name = "eth10"
+  }
+  networks_advanced {
+      name = "eth11"
+  }
+  networks_advanced {
+      name = "eth12"
   }
   upload {
       content = "${file("${path.module}/configs/Leaf-2.conf")}"
@@ -125,19 +143,28 @@ resource "docker_container" "leaf-3" {
   networks_advanced {
       name = "eth6"
   }
+  networks_advanced {
+      name = "eth13"
+  }
+  networks_advanced {
+      name = "eth14"
+  }
+  networks_advanced {
+      name = "eth15"
+  }
 }
 resource "docker_network" "eth0" {
   name = "eth0"
-  driver = "macvlan"
+  driver = "ipvlan"
 }
 
 resource "docker_network" "eth1" {
   name = "eth1"
-  driver = "macvlan"
+  driver = "ipvlan"
 }
 resource "docker_network" "eth2" {
   name = "eth2"
-  driver = "macvlan"
+  driver = "ipvlan"
 }
 resource "docker_network" "eth3" {
     name = "eth3"
@@ -162,10 +189,44 @@ resource "docker_network" "eth7" {
 resource "docker_network" "eth8" {
     name = "eth8"
     driver = "macvlan"
-}resource "docker_network" "eth9" {
+}
+resource "docker_network" "eth9" {
     name = "eth9"
     driver = "macvlan"
-}resource "docker_network" "eth10" {
+}
+resource "docker_network" "eth10" {
     name = "eth10"
+    driver = "macvlan"
+}
+resource "docker_network" "eth11" {
+    name = "eth11"
+    driver = "macvlan"
+}
+resource "docker_network" "eth12" {
+    name = "eth12"
+    driver = "macvlan"
+}
+resource "docker_network" "eth13" {
+    name = "eth13"
+    driver = "macvlan"
+}
+resource "docker_network" "eth14" {
+    name = "eth14"
+    driver = "macvlan"
+}
+resource "docker_network" "eth15" {
+    name = "eth15"
+    driver = "macvlan"
+}
+resource "docker_network" "eth16" {
+    name = "eth16"
+    driver = "macvlan"
+}
+resource "docker_network" "eth17" {
+    name = "eth17"
+    driver = "macvlan"
+}
+resource "docker_network" "eth18" {
+    name = "eth18"
     driver = "macvlan"
 }
