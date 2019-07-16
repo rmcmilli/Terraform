@@ -26,6 +26,10 @@ resource "docker_container" "spine-1" {
   networks_advanced {
       name = "eth3"
   }
+  upload {
+      content = "${file("${path.module}/configs/Spine-1.conf")}"
+      file = "/mnt/flash/startup-config"
+  }
 }
 resource "docker_container" "spine-2" {
   image = "ceos:latest"
@@ -49,6 +53,10 @@ resource "docker_container" "spine-2" {
   networks_advanced {
       name = "eth6"
   }
+  upload {
+      content = "${file("${path.module}/configs/Spine-2.conf")}"
+      file = "/mnt/flash/startup-config"
+  }
 }
 resource "docker_container" "leaf-1" {
   image = "ceos:latest"
@@ -69,6 +77,10 @@ resource "docker_container" "leaf-1" {
   networks_advanced {
       name = "eth4"
   }
+  upload {
+      content = "${file("${path.module}/configs/Leaf-1.conf")}"
+      file = "/mnt/flash/startup-config"
+  }
 }
 resource "docker_container" "leaf-2" {
   image = "ceos:latest"
@@ -88,6 +100,10 @@ resource "docker_container" "leaf-2" {
   }
   networks_advanced {
       name = "eth5"
+  }
+  upload {
+      content = "${file("${path.module}/configs/Leaf-2.conf")}"
+      file = "/mnt/flash/startup-config"
   }
 }
 resource "docker_container" "leaf-3" {
