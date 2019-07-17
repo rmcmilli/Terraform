@@ -155,16 +155,25 @@ resource "docker_container" "leaf-3" {
 }
 resource "docker_network" "eth0" {
   name = "eth0"
-  driver = "ipvlan"
+  driver = "macvlan"
+  options = {
+      macvlan_mode = "bridge"
+      }
 }
 
 resource "docker_network" "eth1" {
   name = "eth1"
-  driver = "ipvlan"
+  driver = "macvlan"
+  options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth2" {
   name = "eth2"
-  driver = "ipvlan"
+  driver = "macvlan"
+  options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth3" {
     name = "eth3"
