@@ -1,6 +1,7 @@
 # Configure the Docker provider
 provider "docker" {
-    host = "tcp://127.0.0.1:2376"
+    #host = "tcp://127.0.0.1:2376"
+    host = "unix:///var/run/docker.sock"
 }
 
 # Create single ceos containter
@@ -159,7 +160,7 @@ resource "docker_container" "host1_leaf1"{
     hostname = "host1_leaf1"
     attach = "false"
     logs = "false"
-    command = ["/bin/bash"]
+    command = ["sleep", "600"]
     start = "true"
    /* networks_advanced {
         name = "eth8"

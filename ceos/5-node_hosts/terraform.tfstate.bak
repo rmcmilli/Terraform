@@ -1,0 +1,1266 @@
+{
+  "version": 4,
+  "terraform_version": "0.12.5",
+  "serial": 97,
+  "lineage": "9beed596-b915-78c6-5244-b0ecd4c3e6db",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "host1_leaf1",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": [],
+            "command": [
+              "/bin/bash"
+            ],
+            "container_logs": null,
+            "cpu_set": null,
+            "cpu_shares": null,
+            "destroy_grace_seconds": null,
+            "devices": [],
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": null,
+            "entrypoint": null,
+            "env": null,
+            "exit_code": null,
+            "gateway": "172.17.0.1",
+            "healthcheck": [],
+            "host": [],
+            "hostname": "host1_leaf1",
+            "id": "5f2a171e405fd892c8fb2745f1fd8894e272cee5ed00437fbe82797b6ca0e7c7",
+            "image": "ubuntu:18.04",
+            "ip_address": "172.17.0.2",
+            "ip_prefix_length": 16,
+            "labels": null,
+            "links": null,
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": null,
+            "memory": null,
+            "memory_swap": null,
+            "mounts": [],
+            "must_run": true,
+            "name": "host1_leaf1",
+            "network_alias": null,
+            "network_data": [
+              {
+                "gateway": "172.17.0.1",
+                "ip_address": "172.17.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "bridge"
+              }
+            ],
+            "network_mode": null,
+            "networks": null,
+            "networks_advanced": [],
+            "pid_mode": null,
+            "ports": [],
+            "privileged": null,
+            "publish_all_ports": null,
+            "restart": "no",
+            "rm": false,
+            "start": true,
+            "tmpfs": null,
+            "ulimit": [],
+            "upload": [],
+            "user": null,
+            "userns_mode": null,
+            "volumes": []
+          },
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "leaf-1",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": null,
+            "command": [
+              "/sbin/init"
+            ],
+            "container_logs": null,
+            "cpu_set": null,
+            "cpu_shares": null,
+            "destroy_grace_seconds": null,
+            "devices": null,
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": null,
+            "entrypoint": null,
+            "env": [
+              "CEOS=1",
+              "EOS_PLATFORM=ceoslab",
+              "ETBA=1",
+              "INTFTYPE=eth",
+              "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1",
+              "container=docker"
+            ],
+            "exit_code": null,
+            "gateway": "172.21.0.1",
+            "healthcheck": null,
+            "host": null,
+            "hostname": null,
+            "id": "b7138feae685a6946c4522f9486c6c276aaac29a4b070994f1961f1b500d30b9",
+            "image": "ceos:latest",
+            "ip_address": "172.21.0.3",
+            "ip_prefix_length": 16,
+            "labels": null,
+            "links": null,
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": null,
+            "memory": null,
+            "memory_swap": null,
+            "mounts": null,
+            "must_run": true,
+            "name": "leaf-1",
+            "network_alias": null,
+            "network_data": [
+              {
+                "gateway": "172.29.0.1",
+                "ip_address": "172.29.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth8"
+              },
+              {
+                "gateway": "192.168.112.1",
+                "ip_address": "192.168.112.2",
+                "ip_prefix_length": 20,
+                "network_name": "eth9"
+              },
+              {
+                "gateway": "172.23.0.1",
+                "ip_address": "172.23.0.4",
+                "ip_prefix_length": 16,
+                "network_name": "eth0"
+              },
+              {
+                "gateway": "172.27.0.1",
+                "ip_address": "172.27.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth1"
+              },
+              {
+                "gateway": "172.21.0.1",
+                "ip_address": "172.21.0.3",
+                "ip_prefix_length": 16,
+                "network_name": "eth4"
+              },
+              {
+                "gateway": "192.168.96.1",
+                "ip_address": "192.168.96.2",
+                "ip_prefix_length": 20,
+                "network_name": "eth7"
+              }
+            ],
+            "network_mode": null,
+            "networks": null,
+            "networks_advanced": [
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth0"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth1"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth4"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth7"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth8"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth9"
+              }
+            ],
+            "pid_mode": null,
+            "ports": [],
+            "privileged": true,
+            "publish_all_ports": null,
+            "restart": "always",
+            "rm": false,
+            "start": true,
+            "tmpfs": null,
+            "ulimit": null,
+            "upload": [
+              {
+                "content": "\nservice routing protocols model multi-agent\n!\n!\nagent AgentMonitor shutdown\nagent LacpTxAgent shutdown\nagent IgmpSnooping shutdown\nagent EventMgr shutdown\nagent SampledFlowTrac shutdown\nagent TopoAgent shutdown\nagent Qos shutdown\nagent Bfd shutdown\nagent PowerManager shutdown\nagent L2Rib shutdown\nagent PortSec shutdown\nagent Thermostat shutdown\nagent PowerFuse shutdown\nagent McastCommon shutdown\nagent StpTxRx shutdown\nagent McastCommon6 shutdown\nagent LicenseManager shutdown\n!\nhostname leaf-1\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nvlan 10\n   name l2-vxlan\n!\nvlan 20\n!\nvrf definition gold\n!\ninterface Ethernet1\n   no switchport\n   ip address 10.100.0.1/31\n!\ninterface Ethernet2\n   no switchport\n   ip address 10.100.0.7/31\n!\ninterface Ethernet3\n   switchport\n   switchport mode access\n   switchport access vlan 20\n!\ninterface Loopback0\n   ip address 10.101.0.3/32\n!\ninterface Loopback1\n   ip address 10.101.0.8/32\n!\ninterface Loopback2\n   vrf forwarding gold\n   ip address 192.168.3.2/24\n!\ninterface Vlan20\n   vrf forwarding gold\n   ip address virtual 192.168.20.1/24\n!\ninterface Vxlan1\n   vxlan source-interface Loopback1\n   vxlan udp-port 4789\n   vxlan vlan 10 vni 100010\n   vxlan vrf gold vni 100001\n   vxlan learn-restrict any\n!\nip routing\nip routing vrf gold\n!\nrouter bgp 64501\n   neighbor evpn peer-group\n   neighbor evpn remote-as 64500\n   neighbor evpn update-source Loopback0\n   neighbor evpn ebgp-multihop 3\n   neighbor evpn send-community extended\n   neighbor evpn maximum-routes 12000\n   neighbor 10.100.0.0 remote-as 64500\n   neighbor 10.100.0.0 maximum-routes 12000\n   neighbor 10.100.0.6 remote-as 64500\n   neighbor 10.100.0.6 maximum-routes 12000\n   neighbor 10.101.0.1 peer-group evpn\n   neighbor 10.101.0.2 peer-group evpn\n   redistribute connected\n   !\n   vlan 10\n      rd auto\n      route-target both 10:100010\n      redistribute learned\n   !\n   vlan 20\n   !\n   address-family evpn\n      neighbor evpn activate\n   !\n   address-family ipv4\n      neighbor 10.100.0.0 activate\n      neighbor 10.100.0.6 activate\n   !\n   vrf gold\n      rd 10.101.0.8:1\n      route-target import evpn 1:100001\n      route-target export evpn 1:100001\n      redistribute connected\n!\n",
+                "executable": false,
+                "file": "/mnt/flash/startup-config"
+              }
+            ],
+            "user": null,
+            "userns_mode": null,
+            "volumes": null
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "leaf-2",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": null,
+            "command": [
+              "/sbin/init"
+            ],
+            "container_logs": null,
+            "cpu_set": null,
+            "cpu_shares": null,
+            "destroy_grace_seconds": null,
+            "devices": null,
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": null,
+            "entrypoint": null,
+            "env": [
+              "CEOS=1",
+              "EOS_PLATFORM=ceoslab",
+              "ETBA=1",
+              "INTFTYPE=eth",
+              "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1",
+              "container=docker"
+            ],
+            "exit_code": null,
+            "gateway": "172.23.0.1",
+            "healthcheck": null,
+            "host": null,
+            "hostname": null,
+            "id": "d4ddc5fb29ffac623c829e3501f92e848942d7ec8359d3b75f04e9bda128d648",
+            "image": "ceos:latest",
+            "ip_address": "172.23.0.3",
+            "ip_prefix_length": 16,
+            "labels": null,
+            "links": null,
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": null,
+            "memory": null,
+            "memory_swap": null,
+            "mounts": null,
+            "must_run": true,
+            "name": "leaf-2",
+            "network_alias": null,
+            "network_data": [
+              {
+                "gateway": "172.23.0.1",
+                "ip_address": "172.23.0.3",
+                "ip_prefix_length": 16,
+                "network_name": "eth0"
+              },
+              {
+                "gateway": "192.168.32.1",
+                "ip_address": "192.168.32.3",
+                "ip_prefix_length": 20,
+                "network_name": "eth2"
+              },
+              {
+                "gateway": "192.168.64.1",
+                "ip_address": "192.168.64.2",
+                "ip_prefix_length": 20,
+                "network_name": "eth5"
+              }
+            ],
+            "network_mode": null,
+            "networks": null,
+            "networks_advanced": [
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth0"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth2"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth5"
+              }
+            ],
+            "pid_mode": null,
+            "ports": [],
+            "privileged": true,
+            "publish_all_ports": null,
+            "restart": "always",
+            "rm": false,
+            "start": true,
+            "tmpfs": null,
+            "ulimit": null,
+            "upload": [
+              {
+                "content": "\nservice routing protocols model multi-agent\n!\n!\nagent AgentMonitor shutdown\nagent LacpTxAgent shutdown\nagent IgmpSnooping shutdown\nagent EventMgr shutdown\nagent SampledFlowTrac shutdown\nagent TopoAgent shutdown\nagent Qos shutdown\nagent Bfd shutdown\nagent PowerManager shutdown\nagent L2Rib shutdown\nagent PortSec shutdown\nagent Thermostat shutdown\nagent PowerFuse shutdown\nagent McastCommon shutdown\nagent StpTxRx shutdown\nagent McastCommon6 shutdown\nagent LicenseManager shutdown\n!\nhostname leaf-2\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nvlan 10\n   name l2-vxlan\n!\nvlan 20\n!\nvrf definition gold\n!\ninterface Ethernet1\n   no switchport\n   ip address 10.100.0.3/31\n!\ninterface Ethernet2\n   no switchport\n   ip address 10.100.0.9/31\n!\ninterface Loopback0\n   ip address 10.101.0.4/32\n!\ninterface Loopback1\n   ip address 10.101.0.9/32\n!\ninterface Loopback2\n   vrf forwarding gold\n   ip address 192.168.30.1/24\n!\ninterface Loopback3\n   vrf forwarding gold\n   ip address 192.168.3.1/24\n!\n!\ninterface Vlan20\n   vrf forwarding gold\n   ip address virtual 192.168.20.1/24\n!\ninterface Vxlan1\n   vxlan source-interface Loopback1\n   vxlan udp-port 4789\n   vxlan vlan 10 vni 100010\n   vxlan vrf gold vni 100001\n   vxlan learn-restrict any\n!\nip routing\nip routing vrf gold\n!\nrouter bgp 64502\n   router-id 10.101.0.4\n   neighbor evpn peer-group\n   neighbor evpn remote-as 64500\n   neighbor evpn update-source Loopback0\n   neighbor evpn ebgp-multihop 3\n   neighbor evpn send-community extended\n   neighbor evpn maximum-routes 12000\n   neighbor 10.100.0.2 remote-as 64500\n   neighbor 10.100.0.2 maximum-routes 12000\n   neighbor 10.100.0.8 remote-as 64500\n   neighbor 10.100.0.8 maximum-routes 12000\n   neighbor 10.101.0.1 peer-group evpn\n   neighbor 10.101.0.2 peer-group evpn\n   redistribute connected\n   !\n   vlan 10\n      rd auto\n      route-target both 10:100010\n      redistribute learned\n   !\n   address-family evpn\n      neighbor evpn activate\n   !\n   address-family ipv4\n      neighbor 10.100.0.2 activate\n      neighbor 10.100.0.8 activate\n   !\n   vrf gold\n      rd 10.101.0.9:1\n      route-target import evpn 1:100001\n      route-target export evpn 1:100001\n      redistribute connected\n!\n",
+                "executable": false,
+                "file": "/mnt/flash/startup-config"
+              }
+            ],
+            "user": null,
+            "userns_mode": null,
+            "volumes": null
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "leaf-3",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": null,
+            "command": [
+              "/sbin/init"
+            ],
+            "container_logs": null,
+            "cpu_set": null,
+            "cpu_shares": null,
+            "destroy_grace_seconds": null,
+            "devices": null,
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": null,
+            "entrypoint": null,
+            "env": [
+              "CEOS=1",
+              "EOS_PLATFORM=ceoslab",
+              "ETBA=1",
+              "INTFTYPE=eth",
+              "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1",
+              "container=docker"
+            ],
+            "exit_code": null,
+            "gateway": "192.168.80.1",
+            "healthcheck": null,
+            "host": null,
+            "hostname": null,
+            "id": "a567d3d308c168cca5d93c0698aa5615ea558420ff1108668ae0c90869589758",
+            "image": "ceos:latest",
+            "ip_address": "192.168.80.2",
+            "ip_prefix_length": 20,
+            "labels": null,
+            "links": null,
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": null,
+            "memory": null,
+            "memory_swap": null,
+            "mounts": null,
+            "must_run": true,
+            "name": "leaf-3",
+            "network_alias": null,
+            "network_data": [
+              {
+                "gateway": "172.23.0.1",
+                "ip_address": "172.23.0.6",
+                "ip_prefix_length": 16,
+                "network_name": "eth0"
+              },
+              {
+                "gateway": "192.168.80.1",
+                "ip_address": "192.168.80.2",
+                "ip_prefix_length": 20,
+                "network_name": "eth13"
+              },
+              {
+                "gateway": "172.25.0.1",
+                "ip_address": "172.25.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth14"
+              },
+              {
+                "gateway": "172.30.0.1",
+                "ip_address": "172.30.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth15"
+              },
+              {
+                "gateway": "172.28.0.1",
+                "ip_address": "172.28.0.3",
+                "ip_prefix_length": 16,
+                "network_name": "eth3"
+              },
+              {
+                "gateway": "192.168.48.1",
+                "ip_address": "192.168.48.3",
+                "ip_prefix_length": 20,
+                "network_name": "eth6"
+              }
+            ],
+            "network_mode": null,
+            "networks": null,
+            "networks_advanced": [
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth0"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth13"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth14"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth15"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth3"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth6"
+              }
+            ],
+            "pid_mode": null,
+            "ports": [],
+            "privileged": true,
+            "publish_all_ports": null,
+            "restart": "always",
+            "rm": false,
+            "start": true,
+            "tmpfs": null,
+            "ulimit": null,
+            "upload": null,
+            "user": null,
+            "userns_mode": null,
+            "volumes": null
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "spine-1",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": null,
+            "command": [
+              "/sbin/init"
+            ],
+            "container_logs": null,
+            "cpu_set": null,
+            "cpu_shares": null,
+            "destroy_grace_seconds": null,
+            "devices": null,
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": null,
+            "entrypoint": null,
+            "env": [
+              "CEOS=1",
+              "EOS_PLATFORM=ceoslab",
+              "ETBA=1",
+              "INTFTYPE=eth",
+              "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1",
+              "container=docker"
+            ],
+            "exit_code": null,
+            "gateway": "172.23.0.1",
+            "healthcheck": null,
+            "host": null,
+            "hostname": null,
+            "id": "fc863f5a6fe185b4e2e62d19368f769db73acacc71f3c5805ec41a8951f5e14a",
+            "image": "ceos:latest",
+            "ip_address": "172.23.0.5",
+            "ip_prefix_length": 16,
+            "labels": null,
+            "links": null,
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": null,
+            "memory": null,
+            "memory_swap": null,
+            "mounts": null,
+            "must_run": true,
+            "name": "spine-1",
+            "network_alias": null,
+            "network_data": [
+              {
+                "gateway": "172.28.0.1",
+                "ip_address": "172.28.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth3"
+              },
+              {
+                "gateway": "172.23.0.1",
+                "ip_address": "172.23.0.5",
+                "ip_prefix_length": 16,
+                "network_name": "eth0"
+              },
+              {
+                "gateway": "172.27.0.1",
+                "ip_address": "172.27.0.3",
+                "ip_prefix_length": 16,
+                "network_name": "eth1"
+              },
+              {
+                "gateway": "192.168.32.1",
+                "ip_address": "192.168.32.2",
+                "ip_prefix_length": 20,
+                "network_name": "eth2"
+              }
+            ],
+            "network_mode": null,
+            "networks": null,
+            "networks_advanced": [
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth0"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth1"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth2"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth3"
+              }
+            ],
+            "pid_mode": null,
+            "ports": [],
+            "privileged": true,
+            "publish_all_ports": null,
+            "restart": "always",
+            "rm": false,
+            "start": true,
+            "tmpfs": null,
+            "ulimit": null,
+            "upload": [
+              {
+                "content": "!\nservice routing protocols model multi-agent\n!\n!\nagent AgentMonitor shutdown\nagent LacpTxAgent shutdown\nagent IgmpSnooping shutdown\nagent EventMgr shutdown\nagent SampledFlowTrac shutdown\nagent TopoAgent shutdown\nagent Qos shutdown\nagent Bfd shutdown\nagent PowerManager shutdown\nagent L2Rib shutdown\nagent PortSec shutdown\nagent Thermostat shutdown\nagent PowerFuse shutdown\nagent McastCommon shutdown\nagent StpTxRx shutdown\nagent McastCommon6 shutdown\nagent LicenseManager shutdown\n!\nhostname spine-1\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\ninterface Ethernet1\n   no switchport\n   ip address 10.100.0.0/31\n!\ninterface Ethernet2\n   no switchport\n   ip address 10.100.0.2/31\n!\ninterface Ethernet3\n   no switchport\n   ip address 10.100.0.4/31\n!\ninterface Loopback0\n   ip address 10.101.0.1/32\n!\ninterface Loopback1\n   ip address 10.101.0.6/32\n!\ninterface Vxlan1\n   vxlan source-interface Loopback1\n   vxlan udp-port 4789\n   vxlan learn-restrict any\n!\nip routing\n!\nrouter bgp 64500\n   router-id 10.101.0.0\n   neighbor evpn peer-group\n   neighbor evpn next-hop-unchanged\n   neighbor evpn update-source Loopback0\n   neighbor evpn ebgp-multihop 3\n   neighbor evpn send-community extended\n   neighbor evpn maximum-routes 12000\n   neighbor 10.100.0.1 remote-as 64501\n   neighbor 10.100.0.1 maximum-routes 12000\n   neighbor 10.100.0.2 remote-as 64500\n   neighbor 10.100.0.2 maximum-routes 12000\n   neighbor 10.100.0.3 remote-as 64502\n   neighbor 10.100.0.3 maximum-routes 12000\n   neighbor 10.100.0.6 remote-as 64500\n   neighbor 10.100.0.6 maximum-routes 12000\n   neighbor 10.101.0.3 peer-group evpn\n   neighbor 10.101.0.3 remote-as 64501\n   neighbor 10.101.0.4 peer-group evpn\n   neighbor 10.101.0.4 remote-as 64502\n   redistribute connected\n   !\n   address-family evpn\n      neighbor evpn activate\n   !\n   address-family ipv4\n      neighbor 10.100.0.1 activate\n      neighbor 10.100.0.2 activate\n      neighbor 10.100.0.3 activate\n      neighbor 10.100.0.6 activate\n!\n",
+                "executable": false,
+                "file": "/mnt/flash/startup-config"
+              }
+            ],
+            "user": null,
+            "userns_mode": null,
+            "volumes": null
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "spine-2",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": null,
+            "command": [
+              "/sbin/init"
+            ],
+            "container_logs": null,
+            "cpu_set": null,
+            "cpu_shares": null,
+            "destroy_grace_seconds": null,
+            "devices": null,
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": null,
+            "entrypoint": null,
+            "env": [
+              "CEOS=1",
+              "EOS_PLATFORM=ceoslab",
+              "ETBA=1",
+              "INTFTYPE=eth",
+              "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1",
+              "container=docker"
+            ],
+            "exit_code": null,
+            "gateway": "172.21.0.1",
+            "healthcheck": null,
+            "host": null,
+            "hostname": null,
+            "id": "71c14dd8e4598dadb7fafaf0a8f8f42f0b226a85416729d7a5fdec3a2395d3fc",
+            "image": "ceos:latest",
+            "ip_address": "172.21.0.2",
+            "ip_prefix_length": 16,
+            "labels": null,
+            "links": null,
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": null,
+            "memory": null,
+            "memory_swap": null,
+            "mounts": null,
+            "must_run": true,
+            "name": "spine-2",
+            "network_alias": null,
+            "network_data": [
+              {
+                "gateway": "172.23.0.1",
+                "ip_address": "172.23.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth0"
+              },
+              {
+                "gateway": "172.21.0.1",
+                "ip_address": "172.21.0.2",
+                "ip_prefix_length": 16,
+                "network_name": "eth4"
+              },
+              {
+                "gateway": "192.168.64.1",
+                "ip_address": "192.168.64.3",
+                "ip_prefix_length": 20,
+                "network_name": "eth5"
+              },
+              {
+                "gateway": "192.168.48.1",
+                "ip_address": "192.168.48.2",
+                "ip_prefix_length": 20,
+                "network_name": "eth6"
+              }
+            ],
+            "network_mode": null,
+            "networks": null,
+            "networks_advanced": [
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth0"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth4"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth5"
+              },
+              {
+                "aliases": [],
+                "ipv4_address": "",
+                "ipv6_address": "",
+                "name": "eth6"
+              }
+            ],
+            "pid_mode": null,
+            "ports": [],
+            "privileged": true,
+            "publish_all_ports": null,
+            "restart": "always",
+            "rm": false,
+            "start": true,
+            "tmpfs": null,
+            "ulimit": null,
+            "upload": [
+              {
+                "content": "\nservice routing protocols model multi-agent\n!\n!\nagent AgentMonitor shutdown\nagent LacpTxAgent shutdown\nagent IgmpSnooping shutdown\nagent EventMgr shutdown\nagent SampledFlowTrac shutdown\nagent TopoAgent shutdown\nagent Qos shutdown\nagent Bfd shutdown\nagent PowerManager shutdown\nagent L2Rib shutdown\nagent PortSec shutdown\nagent Thermostat shutdown\nagent PowerFuse shutdown\nagent McastCommon shutdown\nagent StpTxRx shutdown\nagent McastCommon6 shutdown\nagent LicenseManager shutdown\n!\nhostname spine-2\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\ninterface Ethernet1\n   no switchport\n   ip address 10.100.0.6/31\n!\ninterface Ethernet2\n   no switchport\n   ip address 10.100.0.8/31\n!\ninterface Ethernet3\n   no switchport\n!\ninterface Loopback0\n   ip address 10.101.0.2/32\n!\ninterface Loopback1\n   ip address 10.101.0.7/32\n!\ninterface Vxlan1\n   vxlan udp-port 4789\n   vxlan learn-restrict any\n!\nip routing\n!\nrouter bgp 64500\n   router-id 10.101.0.2\n   neighbor evpn peer-group\n   neighbor evpn next-hop-unchanged\n   neighbor evpn update-source Loopback0\n   neighbor evpn ebgp-multihop 3\n   neighbor evpn send-community extended\n   neighbor evpn maximum-routes 12000\n   neighbor 10.100.0.0 remote-as 64500\n   neighbor 10.100.0.0 maximum-routes 12000\n   neighbor 10.100.0.7 remote-as 64501\n   neighbor 10.100.0.7 maximum-routes 12000\n   neighbor 10.100.0.9 remote-as 64502\n   neighbor 10.100.0.9 maximum-routes 12000\n   neighbor 10.101.0.3 peer-group evpn\n   neighbor 10.101.0.3 remote-as 64501\n   neighbor 10.101.0.4 peer-group evpn\n   neighbor 10.101.0.4 remote-as 64502\n   redistribute connected\n   !\n   address-family evpn\n      neighbor evpn activate\n   !\n   address-family ipv4\n      neighbor 10.100.0.0 activate\n      neighbor 10.100.0.7 activate\n      neighbor 10.100.0.9 activate\n!\n",
+                "executable": false,
+                "file": "/mnt/flash/startup-config"
+              }
+            ],
+            "user": null,
+            "userns_mode": null,
+            "volumes": null
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth0",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "391b21643b54fd54497f7146932f264130cab4e06c573dfb27a3b6de725f5193",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth0",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth1",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "9c47bb8bfc4adb3292aa7be0082440b3d76cfb95322ec4cfb84d7e5c3245e09b",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth1",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth10",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "a3f661668a573acf7d111a88d4a1b0427bf14c8eae28f8d07ccfd71c01ee68e0",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth10",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth11",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "de3c8a1e31fb68aed46765c49e82dc74b3df8c88a414cfd87ef9d865e16dfb8b",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth11",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth12",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "ffb3f35cdc7ea62b7b9dbc97f1c7aba4ebd66151a92778531a632af6a7f1e92b",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth12",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth13",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "ef61980aa56d7bad8b68719b93db963d0e8e05507d2930c52bd93ac3974f2770",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth13",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth14",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "674e29264e11eb5f210cde01e4ee77328dcdee8b87d25bebb645907e17a04d90",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth14",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth15",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "5fea6aa38d7d9dc36613a4ff7d641b4991fe64329984257e59aa9cadbcc72353",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth15",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth16",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "56308e3417561ffd43c5669ce43fbceb07284161d3b2106b3794e05832a38de0",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth16",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth17",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "ab0adaec2c34a9ca11c1a8de63a9e3af29adf46d6435159526fa6ffa00402a34",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth17",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth18",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "f7d0b567f8acebdcc287f41d6b94ca40e170d41fd0c86280f0ee79855a9a67d1",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth18",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth2",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "a53b8a0e57746b3143520175e95ad4a0c7d9569d1f8f3f60b9d9b0fbc11730ff",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth2",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth3",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "90e042a6a62bf37e9b5c463e30c328e25b3ef2acc28310a5016a9eb0ed43462b",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth3",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth4",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "2eee8eada2e91b0e8e416148ee306649190122545420f56c54cc479114b33da5",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth4",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth5",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "310fe5fcfedc9eafb40ab447a9e653a62b62d64f4ff04bb90e738ed7136875ef",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth5",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth6",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "1496adee8ef9fef67373362412d6e9112e9071d89314d6123fff31fba6d281a3",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth6",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth7",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "ff77cbfa26fcf149775d25c8021ee7b4023018272fa836831b46d7e489baab24",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth7",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth8",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "macvlan",
+            "id": "5b60855ce08e254850c96825da65a5bc1f6e903370d93b2e781c0bc309f441cf",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth8",
+            "options": {
+              "macvlan_mode": "bridge"
+            },
+            "scope": "local"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_network",
+      "name": "eth9",
+      "provider": "provider.docker",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "attachable": false,
+            "check_duplicate": null,
+            "driver": "bridge",
+            "id": "7add975d2b625c0df40a3496f5061c7317a3720167c3b78d435edce5d09fb8ac",
+            "ingress": false,
+            "internal": false,
+            "ipam_config": null,
+            "ipam_driver": null,
+            "ipv6": false,
+            "labels": null,
+            "name": "eth9",
+            "options": {},
+            "scope": "local"
+          }
+        }
+      ]
+    }
+  ]
+}
