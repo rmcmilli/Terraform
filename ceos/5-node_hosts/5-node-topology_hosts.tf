@@ -158,6 +158,7 @@ resource "docker_container" "leaf-3" {
 }
 resource "docker_container" "host1_leaf1"{
     #image = "ubuntu:18.04"
+    # The image below is alpine-based with installed network tools
     image = "praqma/network-multitool:latest"
     name  = "host1_leaf1"
     hostname = "host1_leaf1"
