@@ -80,13 +80,15 @@ resource "docker_container" "leaf-1" {
   }
   networks_advanced{
       name = "eth7"
+      #ipv4_address = "10.254.0.5"
+      ipv4_address = "192.168.20.2"
   }
-  networks_advanced{
+  /*networks_advanced{
       name = "eth8"
   }
   networks_advanced{
       name = "eth9"
-  }
+  }*/
   upload {
       content = "${file("${path.module}/configs/Leaf-1.conf")}"
       file = "/mnt/flash/startup-config"
@@ -146,157 +148,166 @@ resource "docker_container" "leaf-3" {
   }
   networks_advanced {
       name = "eth13"
-  }
+  }/*
   networks_advanced {
       name = "eth14"
   }
   networks_advanced {
       name = "eth15"
-  }
+  }*/
 }
 resource "docker_container" "host1_leaf1"{
-    image = "ubuntu:18.04"
+    #image = "ubuntu:18.04"
+    image = "praqma/network-multitool:latest"
     name  = "host1_leaf1"
     hostname = "host1_leaf1"
     attach = "false"
     logs = "false"
-    command = ["sleep", "600"]
+    #command = ["sleep", "600"]
+    command = ["tail", "-f", "/dev/null"]
     start = "true"
-   /* networks_advanced {
-        name = "eth8"
-    }*/
+    networks_advanced {
+        name = "eth7"
+        #ipv4_address = "10.254.0.250"
+        ipv4_address = "192.168.20.250"
+    }
 }
 resource "docker_network" "eth0" {
   name = "eth0"
-  #driver = "macvlan"
-  #options = {
-  #    macvlan_mode = "bridge"
-  #    }
+  driver = "macvlan"
+  options = {
+      macvlan_mode = "bridge"
+      }
 }
 
 resource "docker_network" "eth1" {
   name = "eth1"
-  #driver = "macvlan"
-  #options = {
-  #    macvlan_mode = "bridge"
-  #    }
+  driver = "macvlan"
+  options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth2" {
   name = "eth2"
-  #driver = "macvlan"
-  #options = {
-  #    macvlan_mode = "bridge"
-  #    }
+  driver = "macvlan"
+  options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth3" {
     name = "eth3"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth4" {
     name = "eth4"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth5" {
     name = "eth5"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth6" {
     name = "eth6"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth7" {
     name = "eth7"
     #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    ipam_config {
+        #subnet = "10.254.0.0/24"
+        subnet = "192.168.20.0/24"
+    }
+    /*options = {
+      macvlan_mode = "bridge"
+      parent = "enp0s31f6"
+      }*/
 }
 resource "docker_network" "eth8" {
     name = "eth8"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth9" {
     name = "eth9"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth10" {
     name = "eth10"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth11" {
     name = "eth11"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth12" {
     name = "eth12"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth13" {
     name = "eth13"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth14" {
     name = "eth14"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth15" {
     name = "eth15"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth16" {
     name = "eth16"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth17" {
     name = "eth17"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
 resource "docker_network" "eth18" {
     name = "eth18"
-    #driver = "macvlan"
-    #options = {
-    #  macvlan_mode = "bridge"
-    #  }
+    driver = "macvlan"
+    options = {
+      macvlan_mode = "bridge"
+      }
 }
