@@ -83,10 +83,11 @@ resource "docker_container" "leaf-1" {
       #ipv4_address = "10.254.0.5"
       ipv4_address = "192.168.20.2"
   }
-  /*networks_advanced{
-      name = "eth8"
-  }
   networks_advanced{
+      name = "eth8"
+      ipv4_address = "10.254.0.2"
+  }
+  /*networks_advanced{
       name = "eth9"
   }*/
   upload {
@@ -237,10 +238,16 @@ resource "docker_network" "eth7" {
 }
 resource "docker_network" "eth8" {
     name = "eth8"
-    driver = "macvlan"
-    options = {
+    driver = "bridge"
+    /*options = {
       macvlan_mode = "bridge"
-      }
+      parent = "eth0"
+      }*/
+    ipam_config {
+        subnet = "10.254.0.0/24"
+        gateway = "10.254.0.1"
+        #subnet = "192.168.20.0/24"
+    }  
 }
 resource "docker_network" "eth9" {
     name = "eth9"
