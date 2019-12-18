@@ -81,7 +81,7 @@ resource "docker_container" "leaf-1" {
   networks_advanced{
       name = "eth7"
       #ipv4_address = "10.254.0.5"
-      ipv4_address = "192.168.20.2"
+      ipv4_address = "192.168.20.254"
   }
   networks_advanced{
       name = "eth8"
@@ -172,6 +172,9 @@ resource "docker_container" "host1_leaf1"{
         name = "eth7"
         #ipv4_address = "10.254.0.250"
         ipv4_address = "192.168.20.250"
+    }
+    capabilities {
+        add = ["NET_ADMIN"]
     }
 }
 resource "docker_network" "eth0" {
