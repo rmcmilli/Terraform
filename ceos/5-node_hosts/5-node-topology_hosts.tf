@@ -22,7 +22,8 @@ resource "docker_container" "spine-1" {
       name = "eth1"
   }
   networks_advanced {
-      name = "eth2"
+      #name = "eth2"
+      name = docker_network.eth2.name
   }
   networks_advanced {
       name = "eth3"
@@ -322,3 +323,13 @@ resource "docker_network" "eth18" {
       macvlan_mode = "bridge"
       }
 }
+/*
+output "whatever_name"{
+    value = docker_network.eth2.scope
+}
+output "whatever_name_2"{
+    value = docker_network.eth2.id
+}
+output "whatever_name_3"{
+    value = docker_network.eth2.name
+}*/
