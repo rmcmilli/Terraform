@@ -16,17 +16,17 @@ resource "docker_container" "spine-1" {
   start = "true"
   restart = "always"
   networks_advanced {
-      name = "eth0"
+      name = docker_network.eth0.name
   } 
   networks_advanced {
-      name = "eth1"
+      name = docker_network.eth1.name
   }
   networks_advanced {
       #name = "eth2"
       name = docker_network.eth2.name
   }
   networks_advanced {
-      name = "eth3"
+      name = docker_network.eth3.name
   }
   upload {
       content = "${file("${path.module}/configs/Spine-1.conf")}"
@@ -44,16 +44,16 @@ resource "docker_container" "spine-2" {
   start = "true"
   restart = "always"
   networks_advanced {
-      name = "eth0"
+      name = docker_network.eth0.name
   } 
   networks_advanced {
-      name = "eth4"
+      name = docker_network.eth4.name
   }
   networks_advanced {
-      name = "eth5"
+      name = docker_network.eth5.name
   }
   networks_advanced {
-      name = "eth6"
+      name = docker_network.eth6.name
   }
   upload {
       content = "${file("${path.module}/configs/Spine-2.conf")}"
@@ -71,21 +71,21 @@ resource "docker_container" "leaf-1" {
   start = "true"
   restart = "always"
   networks_advanced {
-      name = "eth0"
+      name = docker_network.eth0.name
   } 
   networks_advanced {
-      name = "eth1"
+      name = docker_network.eth1.name
   }
   networks_advanced {
-      name = "eth4"
+      name = docker_network.eth4.name
   }
   networks_advanced{
-      name = "eth7"
+      name = docker_network.eth7.name
       #ipv4_address = "10.254.0.5"
       ipv4_address = "192.168.20.254"
   }
   networks_advanced{
-      name = "eth8"
+      name = docker_network.eth8.name
       ipv4_address = "10.254.0.2"
   }
   /*networks_advanced{
@@ -107,22 +107,22 @@ resource "docker_container" "leaf-2" {
   start = "true"
   restart = "always"
   networks_advanced {
-      name = "eth0"
+      name = docker_network.eth0.name
   } 
   networks_advanced {
-      name = "eth2"
+      name = docker_network.eth2.name
   }
   networks_advanced {
-      name = "eth5"
+      name = docker_network.eth5.name
   }
   #networks_advanced {
-   #   name = "eth10"
+   #   name = "docker_network.th10.name
   #}
   #networks_advanced {
-   #   name = "eth11"
+   #   name = "docker_network.th11.name
   #}
   #networks_advanced {
-    #  name = "eth12"
+    #  name = "docker_network.th12.name
   #}
   upload {
       content = "${file("${path.module}/configs/Leaf-2.conf")}"
@@ -140,22 +140,22 @@ resource "docker_container" "leaf-3" {
   start = "true"
   restart = "always"
   networks_advanced {
-      name = "eth0"
+      name = docker_network.eth0.name
   } 
   networks_advanced {
-      name = "eth3"
+      name = docker_network.eth3.name
   }
   networks_advanced {
-      name = "eth6"
+      name = docker_network.eth6.name
   }
   networks_advanced {
-      name = "eth13"
+      name = docker_network.eth13.name
   }/*
   networks_advanced {
-      name = "eth14"
+      name = "docker_network.eth14.name
   }
   networks_advanced {
-      name = "eth15"
+      name = "docker_network.eth15.name
   }*/
 }
 resource "docker_container" "host1_leaf1"{
@@ -169,8 +169,9 @@ resource "docker_container" "host1_leaf1"{
     #command = ["sleep", "600"]
     command = ["tail", "-f", "/dev/null"]
     start = "true"
+    restart = "always"
     networks_advanced {
-        name = "eth7"
+        name = docker_network.eth7.name
         #ipv4_address = "10.254.0.250"
         ipv4_address = "192.168.20.250"
     }
