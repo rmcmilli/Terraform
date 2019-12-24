@@ -2,4 +2,5 @@
 .tar
 *.tfstate.*
 *.tfstate
-
+**tfstate.*
+**tfstate*
