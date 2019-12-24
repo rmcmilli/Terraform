@@ -167,7 +167,8 @@ resource "docker_container" "host1_leaf1"{
     attach = "false"
     logs = "false"
     #command = ["sleep", "600"]
-    command = ["tail", "-f", "/dev/null"]
+    entrypoint = ["tail", "-f", "/dev/null"]
+    command = ["ip route delete default via 192.168.20.1 dev eth0 && ip route add default via 192.168.20.254 dev eth0"]
     start = "true"
     restart = "always"
     networks_advanced {
