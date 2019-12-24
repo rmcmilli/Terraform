@@ -1,2 +1,5 @@
 .*tar*
 .tar
+*.tfstate.*
+*.tfstate
+

@@ -236,6 +236,7 @@ resource "docker_network" "eth7" {
     ipam_config {
         #subnet = "10.254.0.0/24"
         subnet = "192.168.20.0/24"
+        gateway = "192.168.20.1"
     }
     /*options = {
       macvlan_mode = "bridge"
