@@ -29,7 +29,7 @@ resource "docker_container" "spine-1" {
       name = docker_network.eth3.name
   }
   upload {
-      content = "${file("${path.module}/configs/Spine-1.conf")}"
+      content = file("${path.module}/configs/Spine-1.conf")
       file = "/mnt/flash/startup-config"
   }
 }
@@ -56,7 +56,7 @@ resource "docker_container" "spine-2" {
       name = docker_network.eth6.name
   }
   upload {
-      content = "${file("${path.module}/configs/Spine-2.conf")}"
+      content = file("${path.module}/configs/Spine-2.conf")
       file = "/mnt/flash/startup-config"
   }
 }
@@ -92,7 +92,7 @@ resource "docker_container" "leaf-1" {
       name = "eth9"
   }*/
   upload {
-      content = "${file("${path.module}/configs/Leaf-1.conf")}"
+      content = file("${path.module}/configs/Leaf-1.conf")
       file = "/mnt/flash/startup-config"
   }
 }
@@ -125,7 +125,7 @@ resource "docker_container" "leaf-2" {
     #  name = "docker_network.th12.name
   #}
   upload {
-      content = "${file("${path.module}/configs/Leaf-2.conf")}"
+      content = file("${path.module}/configs/Leaf-2.conf")
       file = "/mnt/flash/startup-config"
   }
 }
