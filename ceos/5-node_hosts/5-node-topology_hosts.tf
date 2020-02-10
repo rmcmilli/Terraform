@@ -10,7 +10,7 @@ resource "docker_container" "spine-1" {
   name  = "spine-1"
   #hostname = "spine-1"
   attach     = "false"
-  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth"]
+  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth", "MGMT_INTF=eth0"]
   command    = ["/sbin/init"]
   privileged = "true"
   start      = "true"
@@ -38,7 +38,7 @@ resource "docker_container" "spine-2" {
   name  = "spine-2"
   #hostname = "ceos_test"
   attach     = "false"
-  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth"]
+  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth", "MGMT_INTF=eth0"]
   command    = ["/sbin/init"]
   privileged = "true"
   start      = "true"
@@ -65,7 +65,7 @@ resource "docker_container" "leaf-1" {
   name  = "leaf-1"
   #hostname = "ceos_test"
   attach     = "false"
-  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth"]
+  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth", "MGMT_INTF=eth0"]
   command    = ["/sbin/init"]
   privileged = "true"
   start      = "true"
@@ -101,7 +101,7 @@ resource "docker_container" "leaf-2" {
   name  = "leaf-2"
   #hostname = "ceos_test"
   attach     = "false"
-  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth"]
+  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth", "MGMT_INTF=eth0"]
   command    = ["/sbin/init"]
   privileged = "true"
   start      = "true"
@@ -134,7 +134,7 @@ resource "docker_container" "leaf-3" {
   name  = "leaf-3"
   #hostname = "ceos_test"
   attach     = "false"
-  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth"]
+  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth", "MGMT_INTF=eth0"]
   command    = ["/sbin/init"]
   privileged = "true"
   start      = "true"
