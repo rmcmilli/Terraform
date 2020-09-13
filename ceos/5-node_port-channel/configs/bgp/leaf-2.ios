@@ -1,0 +1,36 @@
+!
+!
+hostname leaf-2
+!
+!
+ip routing
+!
+!
+router bgp 64514
+!
+  redistribute connected
+  !
+  neighbor 10.250.0.5 remote-as 64512
+  !
+  neighbor 10.250.0.17 remote-as 64512
+  !
+  address-family ipv4
+  !
+  network 10.250.0.0/23 
+  !
+!
+interface eth1
+  no switchport
+  ip address 10.250.0.6/30
+!
+interface eth2
+  no switchport
+  ip address 10.250.0.18/30
+!
+!interface eth3
+!  no switchport 
+!  ip address 10.250.0.9/30
+!
+interface lo0
+  ip address 10.250.1.4/32
+!

@@ -1,0 +1,42 @@
+!
+!
+hostname leaf-3
+!
+!
+ip routing
+!
+vlan 103
+!
+vlan 106
+!
+router ospf 100
+!
+  redistribute connected
+  !
+  network 10.250.0.0/23 area 0
+  !
+  log-adjacency-changes detail
+!
+interface eth1
+  switchport mode trunk
+  switchport trunk vlan allowed 1,103
+!  ip address 10.250.0.10/30
+!
+interface eth2
+  switchport mode trunk
+  switchport trunk vlan allowed 1,106
+!  ip address 10.250.0.22/30
+!
+!interface eth3
+!  no switchport 
+!  ip address 10.250.0.9/30
+!
+interface vlan 103
+  ip address 10.250.0.10/30
+!
+interface vlan 106
+  ip address 10.250.0.22/30
+!
+interface lo0
+  ip address 10.250.1.5/32
+!
