@@ -14,7 +14,7 @@ vlan 102
 vlan 103
 !
 !
-router ospf 100
+router ospf 1
 !
   redistribute connected
   !
