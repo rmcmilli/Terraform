@@ -2,6 +2,7 @@
 !
 hostname leaf-1
 !
+spanning-tree mode rapid-pvst
 !
 ip routing
 !

@@ -5,6 +5,7 @@ hostname spine-2
 !
 ip routing
 !
+spanning-tree mode rapid-pvst
 !
 router bgp 64512
 !
