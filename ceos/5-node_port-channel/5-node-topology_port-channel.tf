@@ -129,53 +129,40 @@ resource "docker_network" "eth0" {
 }
 resource "docker_network" "eth1" {
   name = "eth1"
-  driver = "macvlan"
 }
 resource "docker_network" "eth2" {
   name = "eth2"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth3" {
   name = "eth3"
-  driver = "macvlan"
 }
 resource "docker_network" "eth4" {
   name = "eth4"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth5" {
   name = "eth5"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth6" {
   name = "eth6"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth7" {
   name = "eth7"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth8" {
   name = "eth8"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth9" {
   name = "eth9"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth10" {
   name = "eth10"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth11" {
   name = "eth11"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth12" {
   name = "eth12"
-  driver = "macvlan"
-}
+  }
 resource "docker_network" "eth13" {
   name = "eth13"
-  driver = "macvlan"
-}
+  }
