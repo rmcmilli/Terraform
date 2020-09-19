@@ -33,6 +33,7 @@ interface eth2
 !  ip address 10.250.0.14/30
 !
 interface eth3
+  channel-group 2 mode on
 !  no switchport 
 !  ip address 10.250.0.9/30
 !
@@ -42,11 +43,16 @@ int po1
   !switchport mode trunk 
   !switchport trunk allowed vlan all
 !
+interface po2
+  no switchport
+  ip address 10.250.0.14/30
+!
+!
 interface vlan 101
   !ip address 10.250.0.2/30
 !
-interface vlan 104
-  ip address 10.250.0.14/30
+!interface vlan 104
+!  ip address 10.250.0.14/30
 !
 !
 interface lo0

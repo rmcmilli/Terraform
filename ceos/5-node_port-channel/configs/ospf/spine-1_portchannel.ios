@@ -56,22 +56,26 @@ interface po1
 !  switchport trunk allowed vlan all
 !
 interface po2
-  switchport mode trunk
-  switchport trunk allowed vlan all
+  no switchport
+  ip address 10.250.0.5/30
+  !switchport mode trunk
+  !switchport trunk allowed vlan all
 !
 interface po3
-  switchport mode trunk
-  switchport trunk allowed vlan all
+  no switchport 
+  ip address 10.250.0.9/30
+  !switchport mode trunk
+  !switchport trunk allowed vlan all
 !
 !
-interface vlan 101
+!interface vlan 101
 !  ip address 10.250.0.1/30
 !
-interface vlan 102
-  ip address 10.250.0.5/30
+!interface vlan 102
+!  ip address 10.250.0.5/30
 !
-interface vlan 103
-  ip address 10.250.0.9/30
+!interface vlan 103
+!  ip address 10.250.0.9/30
 !
 !
 interface lo0
