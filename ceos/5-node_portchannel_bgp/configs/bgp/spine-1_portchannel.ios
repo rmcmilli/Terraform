@@ -10,11 +10,19 @@ router bgp 64512
 !
   redistribute connected
   !
+  neighbor 10.250.1.2 remote-as 64512
+  !
   neighbor 10.250.0.2 remote-as 64513
+  !
+  neighbor 10.250.0.2 allowas-in
   !
   neighbor 10.250.0.6 remote-as 64514
   !
+  neighbor 10.250.0.6 allowas-in
+  !
   neighbor 10.250.0.10 remote-as 64515
+  !
+  neighbor 10.250.0.10 allowas-in
   !
   address-family ipv4 
   !
