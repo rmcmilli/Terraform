@@ -36,6 +36,10 @@ resource "docker_container" "spine-1" {
   networks_advanced {
     name = docker_network.eth6.name
   }
+  ports {
+    internal = 22
+    external = 22
+  }
 }
 resource "docker_container" "spine-2" {
   image = "ceos:latest"
@@ -58,6 +62,10 @@ resource "docker_container" "spine-2" {
   }
   networks_advanced {
     name = docker_network.eth9.name
+  }
+  ports {
+    internal = 22
+    external = 22
   }
 }
 resource "docker_container" "leaf-1" {
@@ -82,6 +90,10 @@ resource "docker_container" "leaf-1" {
   networks_advanced {
     name = docker_network.eth7.name
   }
+  ports {
+    internal = 22
+    external = 22
+  }
 }
 resource "docker_container" "leaf-2" {
   image = "ceos:latest"
@@ -105,6 +117,10 @@ resource "docker_container" "leaf-2" {
   networks_advanced {
     name = docker_network.eth8.name
   }
+  ports {
+    internal = 22
+    external = 22
+  }
 }
 resource "docker_container" "leaf-3" {
   image = "ceos:latest"
@@ -127,6 +143,10 @@ resource "docker_container" "leaf-3" {
   }
   networks_advanced {
     name = docker_network.eth9.name
+  }
+  ports {
+    internal = 22
+    external = 22
   }
 }
 resource "docker_network" "eth0" {
