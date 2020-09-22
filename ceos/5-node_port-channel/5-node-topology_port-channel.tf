@@ -188,31 +188,58 @@ resource "docker_network" "eth4" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth4.id, 0, 12)}/bridge/group_fwd_mask"
   }
-  }
+}
 resource "docker_network" "eth5" {
   name = "eth5"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth5.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth6" {
   name = "eth6"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth6.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth7" {
   name = "eth7"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth7.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth8" {
   name = "eth8"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth8.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth9" {
   name = "eth9"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth9.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth10" {
   name = "eth10"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth10.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth11" {
   name = "eth11"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth11.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth12" {
   name = "eth12"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth12.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
 resource "docker_network" "eth13" {
   name = "eth13"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth13.id, 0, 12)}/bridge/group_fwd_mask"
   }
+}
