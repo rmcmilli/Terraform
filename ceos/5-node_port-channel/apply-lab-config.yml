@@ -6,31 +6,31 @@
   - name: add spine-1 to inventory
     add_host:
       name: spine-1
-      ansible_connection: docker
+      ansible_connection: network_cli
     changed_when: false
 
   - name: add spine-2
     add_host:
       name: spine-2
-      ansible_connection: docker
+      ansible_connection: network_cli
     changed_when: false
 
   - name: add leaf-1
     add_host:
       name: leaf-1
-      ansible_connection: docker
+      ansible_connection: network_cli
     changed_when: false
 
   - name: add leaf-2
     add_host:
       name: leaf-2
-      ansible_connection: docker
+      ansible_connection: network_cli
     changed_when: false
 
   - name: add leaf-3
     add_host:
       name: leaf-3
-      ansible_connection: docker
+      ansible_connection: network_cli
     changed_when: false
 
   - name: load configuration on spine-1
