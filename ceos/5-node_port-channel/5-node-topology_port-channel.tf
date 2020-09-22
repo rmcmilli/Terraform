@@ -38,7 +38,7 @@ resource "docker_container" "spine-1" {
   }
   ports {
     internal = 22
-    external = 22
+    external = 2221
   }
 }
 resource "docker_container" "spine-2" {
@@ -65,7 +65,7 @@ resource "docker_container" "spine-2" {
   }
   ports {
     internal = 22
-    external = 22
+    external = 2222
   }
 }
 resource "docker_container" "leaf-1" {
@@ -92,7 +92,7 @@ resource "docker_container" "leaf-1" {
   }
   ports {
     internal = 22
-    external = 22
+    external = 2223
   }
 }
 resource "docker_container" "leaf-2" {
@@ -119,7 +119,7 @@ resource "docker_container" "leaf-2" {
   }
   ports {
     internal = 22
-    external = 22
+    external = 2224
   }
 }
 resource "docker_container" "leaf-3" {
@@ -146,7 +146,7 @@ resource "docker_container" "leaf-3" {
   }
   ports {
     internal = 22
-    external = 22
+    external = 2225
   }
 }
 resource "docker_network" "eth0" {
