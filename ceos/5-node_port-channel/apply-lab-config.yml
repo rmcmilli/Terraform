@@ -1,61 +1,60 @@
 ---
-- hosts: ubuntuserver
+- hosts: 10.10.0.180
   vars:
-    ssh_port: 2221
   tasks: 
 
   - name: add spine-1 to inventory
     add_host:
-      name: [spine-1]
+      name: spine-1
       ansible_connection: docker
     changed_when: false
 
   - name: add spine-2
     add_host:
-      name: [spine-2]
+      name: spine-2
       ansible_connection: docker
     changed_when: false
 
   - name: add leaf-1
     add_host:
-      name: [leaf-1]
+      name: leaf-1
       ansible_connection: docker
     changed_when: false
 
   - name: add leaf-2
     add_host:
-      name: [leaf-2]
+      name: leaf-2
       ansible_connection: docker
     changed_when: false
 
   - name: add leaf-3
     add_host:
-      name: [leaf-3]
+      name: leaf-3
       ansible_connection: docker
     changed_when: false
 
   - name: load configuration on spine-1
-    delegate_to: [spine-1]
+    delegate_to: spine-1
     eos_config:
       src: ../configs/spine-1_portchannel.ios
 
   - name: load configuration on spine-2
-    delegate_to: [spine-2]
+    delegate_to: spine-2
     eos_config:
       src: ../configs/spine-2_portchannel.ios
 
   - name: load configuration on leaf-1
-    delegate_to: [leaf-1]
+    delegate_to: leaf-1
     eos_config:
       src: ../configs/leaf-1_portchannel.ios
 
   - name: load configuration on leaf-2
-    delegate_to: [leaf-2]
+    delegate_to: leaf-2
     eos_config:
       src: ../configs/leaf-2_portchannel.ios
 
   - name: load configuration on leaf-3
-    delegate_to: [leaf-3]
+    delegate_to: leaf-3
     eos_config:
       src: ../configs/leaf-3_portchannel.ios
 
