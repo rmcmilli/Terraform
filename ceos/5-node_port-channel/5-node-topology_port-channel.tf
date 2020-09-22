@@ -40,6 +40,9 @@ resource "docker_container" "spine-1" {
     internal = 22
     external = 2221
   }
+  provisioner "local-exec" {
+    command = "echo 16384 > /sys/class/net/br-${docker_network.eth1.id}/bridge/group_fwd_mask"
+  }
 }
 resource "docker_container" "spine-2" {
   image = "ceos:latest"
