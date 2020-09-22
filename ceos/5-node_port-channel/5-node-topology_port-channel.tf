@@ -16,7 +16,7 @@ resource "docker_container" "spine-1" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
-    ipv4_address = "10.250.254.1"
+    ipv4_address = "10.250.254.2"
   }
   networks_advanced {
     name = docker_network.eth1.name
@@ -52,7 +52,7 @@ resource "docker_container" "spine-2" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
-    ipv4_address = "10.250.254.2"
+    ipv4_address = "10.250.254.3"
   }
   networks_advanced {
     name = docker_network.eth7.name
@@ -79,7 +79,7 @@ resource "docker_container" "leaf-1" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
-    ipv4_address = "10.250.254.3"
+    ipv4_address = "10.250.254.4"
   }
   networks_advanced {
     name = docker_network.eth1.name
@@ -106,7 +106,7 @@ resource "docker_container" "leaf-2" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
-    ipv4_address = "10.250.254.4"
+    ipv4_address = "10.250.254.5"
   }
   networks_advanced {
     name = docker_network.eth3.name
@@ -133,7 +133,7 @@ resource "docker_container" "leaf-3" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
-    ipv4_address = "10.250.254.5"
+    ipv4_address = "10.250.254.6"
   }
   networks_advanced {
     name = docker_network.eth5.name
