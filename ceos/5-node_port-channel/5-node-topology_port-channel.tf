@@ -168,25 +168,25 @@ resource "docker_network" "eth0" {
 resource "docker_network" "eth1" {
   name = "eth1"
   provisioner "local-exec" {
-    command = "echo 16384 > /sys/class/net/br-${substr(docker_network.eth1.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth1.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
 resource "docker_network" "eth2" {
   name = "eth2"
   provisioner "local-exec" {
-    command = "echo 16384 > /sys/class/net/br-${substr(docker_network.eth2.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth2.id, 0, 12)}/bridge/group_fwd_mask"
   }
   }
 resource "docker_network" "eth3" {
   name = "eth3"
   provisioner "local-exec" {
-    command = "echo 16384 > /sys/class/net/br-${substr(docker_network.eth3.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth3.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
 resource "docker_network" "eth4" {
   name = "eth4"
   provisioner "local-exec" {
-    command = "echo 16384 > /sys/class/net/br-${substr(docker_network.eth4.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth4.id, 0, 12)}/bridge/group_fwd_mask"
   }
   }
 resource "docker_network" "eth5" {
