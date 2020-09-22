@@ -53,4 +53,4 @@ interface lo0
   ip address 10.250.1.5/32
 !
 interface mgmt0
-  ip address 10.250.254.5/24
+  ip address 10.250.254.6/24
