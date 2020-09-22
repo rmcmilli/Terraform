@@ -63,3 +63,6 @@
       src: ../configs/leaf-3/leaf-3_portchannel.ios
       dest: /mnt/flash/startup-config
 
+  - name: restart containers
+    shell: docker restart spine-1 spine-2 leaf-1 leaf-2 leaf-3
+    
