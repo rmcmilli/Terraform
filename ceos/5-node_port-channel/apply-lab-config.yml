@@ -35,41 +35,31 @@
 
   - name: load configuration on spine-1
     delegate_to: spine-1
-    script: ../configs/spine-1/running-config
-    args:
-      executable: Cli
-      chdir: /tmp/
-
+    copy:
+      src: ../configs/spine-1/spine-1_portchannel.ios
+      dest: /mnt/flash/startup-config
 
   - name: load configuration on spine-2
     delegate_to: spine-2
-    script:  ../configs/spine-2/running-config
-    args:
-      executable: Cli
-      chdir: /mnt/flash/
-
+    copy:
+      src: ../configs/spine-2/spine-2_portchannel.ios
+      dest: /mnt/flash/startup-config
 
   - name: load configuration on leaf-1
     delegate_to: leaf-1
-    script:  ../configs/leaf-1/running-config
-    args:
-      executable: Cli
-      chdir: /mnt/flash/
-
+    copy:
+      src: ../configs/leaf-1/leaf-1_portchannel.ios
+      dest: /mnt/flash/startup-config
 
   - name: load configuration on leaf-2
     delegate_to: leaf-2
-    script:  ../configs/leaf-2/running-config
-    args:
-      executable: Cli
-      chdir: /mnt/flash/
-
+    copy:
+      src: ../configs/leaf-2/leaf-2_portchannel.ios
+      dest: /mnt/flash/startup-config
 
   - name: load configuration on leaf-3
     delegate_to: leaf-3
-    script: ../configs/leaf-3/running-config
-    args:
-      executable: Cli
-      chdir: /mnt/flash/
-
+    copy:
+      src: ../configs/leaf-3/leaf-3_portchannel.ios
+      dest: /mnt/flash/startup-config
 
