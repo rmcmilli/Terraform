@@ -31,7 +31,7 @@
     add_host:
       name: leaf-3
       ansible_connection: docker
-      changed_when: false
+    changed_when: false
 
   - name: load configuration on spine-1
     delegate_to: spine-1
