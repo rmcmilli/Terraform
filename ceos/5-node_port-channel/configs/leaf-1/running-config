@@ -1,0 +1,64 @@
+!
+!
+hostname leaf-1
+!
+!
+ip routing
+!
+spanning-tree mode rapid-pvst
+!
+vlan 101
+!
+vlan 104
+!
+!
+router ospf 1
+!
+  redistribute connected
+  !
+  network 10.250.0.0/23 area 0
+  !
+  log-adjacency-changes detail
+!
+interface eth1
+  channel-group 1 mode on
+  !switchport mode trunk
+  !switchport trunk allowed vlan 1,101
+!  ip address 10.250.0.2/30
+!
+interface eth2
+  channel-group 1 mode on
+  !switchport mode trunk
+  !switchport trunk allowed vlan 1,104
+!  ip address 10.250.0.14/30
+!
+interface eth3
+  channel-group 2 mode on
+!  no switchport 
+!  ip address 10.250.0.9/30
+!
+int po1
+  no switchport
+  ip address 10.250.0.2/30
+  !switchport mode trunk 
+  !switchport trunk allowed vlan all
+!
+interface po2
+  no switchport
+  ip address 10.250.0.14/30
+!
+!
+interface vlan 101
+  !ip address 10.250.0.2/30
+!
+!interface vlan 104
+!  ip address 10.250.0.14/30
+!
+!
+interface lo0
+  ip address 10.250.1.3/32
+!
+interface Management0
+  ip address 10.250.254.4/24
+!
+!
