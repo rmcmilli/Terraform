@@ -1,3 +1,6 @@
+enable
+
+configure terminal
 !
 !
 hostname leaf-1
@@ -60,3 +63,5 @@ interface lo0
 !
 interface mgmt0
   ip address 10.250.254.4/24
+!
+!
