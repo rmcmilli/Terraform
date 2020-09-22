@@ -153,6 +153,7 @@ resource "docker_network" "eth0" {
   name = "eth0"
   ipam_config {
     subnet = "10.250.254.0/24"
+    gateway = "10.250.254.1"
   }
 }
 resource "docker_network" "eth1" {
