@@ -4,6 +4,15 @@ provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 
+variable "long-id" {
+  type = string
+  default = "000000000000000"
+}
+variable "short-id" {
+  type = string
+  default = "000000000000"
+}
+
 # Create single ceos containter
 resource "docker_container" "spine-1" {
   image = "ceos:latest"
@@ -39,9 +48,6 @@ resource "docker_container" "spine-1" {
   ports {
     internal = 22
     external = 2221
-  }
-  provisioner "local-exec" {
-    command = "echo 16384 > /sys/class/net/br-${docker_network.eth1.id}/bridge/group_fwd_mask"
   }
 }
 resource "docker_container" "spine-2" {
@@ -161,6 +167,9 @@ resource "docker_network" "eth0" {
 }
 resource "docker_network" "eth1" {
   name = "eth1"
+  provisioner "local-exec" {
+    command = "echo 16384 > /sys/class/net/br-${substr(docker_network.eth1.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
 resource "docker_network" "eth2" {
   name = "eth2"
