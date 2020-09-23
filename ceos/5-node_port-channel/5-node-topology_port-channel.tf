@@ -50,7 +50,7 @@ resource "docker_container" "spine-1" {
     external = 2221
   }
   provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=spine-1' apply-config-mod.yml"
+    command = "ansible-playbook -e 'switch_name=spine-1' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_container" "spine-2" {
@@ -80,7 +80,7 @@ resource "docker_container" "spine-2" {
     external = 2222
   }
   provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=spine-2' apply-config-mod.yml"
+    command = "ansible-playbook -e 'switch_name=spine-2' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_container" "leaf-1" {
@@ -110,7 +110,7 @@ resource "docker_container" "leaf-1" {
     external = 2223
   }
   provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=leaf-1' apply-config-mod.yml"
+    command = "ansible-playbook -e 'switch_name=leaf-1' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_container" "leaf-2" {
@@ -140,7 +140,7 @@ resource "docker_container" "leaf-2" {
     external = 2224
   }
   provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=leaf-2' apply-config-mod.yml"
+    command = "ansible-playbook -e 'switch_name=leaf-2' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_container" "leaf-3" {
@@ -170,7 +170,7 @@ resource "docker_container" "leaf-3" {
     external = 2225
   }
   provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=leaf-3' apply-config-mod.yml"
+    command = "ansible-playbook -e 'switch_name=leaf-3' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_network" "eth0" {
