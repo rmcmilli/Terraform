@@ -40,6 +40,10 @@ resource "docker_container" "spine-1" {
     internal = 22
     external = 2221
   }
+  ports {
+    internal 443
+    external 8001
+  }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=spine-1' apply-config-mod.yml"
   }
@@ -69,6 +73,10 @@ resource "docker_container" "spine-2" {
   ports {
     internal = 22
     external = 2222
+  }
+  ports {
+    internal 443
+    external 8002
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=spine-2' apply-config-mod.yml"
@@ -100,6 +108,10 @@ resource "docker_container" "leaf-1" {
     internal = 22
     external = 2223
   }
+  ports {
+    internal 443
+    external 8003
+  }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=leaf-1' apply-config-mod.yml"
   }
@@ -129,6 +141,10 @@ resource "docker_container" "leaf-2" {
   ports {
     internal = 22
     external = 2224
+  }
+  ports {
+    internal 443
+    external 8004
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=leaf-2' apply-config-mod.yml"
@@ -160,6 +176,10 @@ resource "docker_container" "leaf-3" {
     internal = 22
     external = 2225
   }
+  ports {
+    internal 443
+    external 8005
+  }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=leaf-3' apply-config-mod.yml"
   }
@@ -171,7 +191,7 @@ resource "docker_network" "eth0" {
     gateway = "10.250.254.1"
   }
 }
-resource "docker_network" "eth1" {
+resource "docker_network" "eth1" {  
   name = "eth1"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth1.id, 0, 12)}/bridge/group_fwd_mask"
