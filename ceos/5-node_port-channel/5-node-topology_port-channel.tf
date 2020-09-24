@@ -4,15 +4,6 @@ provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 
-variable "long-id" {
-  type = string
-  default = "000000000000000"
-}
-variable "short-id" {
-  type = string
-  default = "000000000000"
-}
-
 # Create single ceos containter
 resource "docker_container" "spine-1" {
   image = "ceos:latest"
