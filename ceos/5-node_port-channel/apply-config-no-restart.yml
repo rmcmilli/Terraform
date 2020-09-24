@@ -6,7 +6,9 @@
   - name: add "{{ switch_name }}" to inventory
     add_host:
       name: "{{ switch_name }}"
-      ansible_connection: http_api 
+      ansible_connection: httpapi
+      ansible_user: admin
+      ansible_password: password1!
     changed_when: false
 
   - name: load configuration from file
