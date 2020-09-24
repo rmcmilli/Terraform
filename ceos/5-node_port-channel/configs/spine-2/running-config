@@ -1,3 +1,6 @@
+enable
+
+configure terminal
 !
 !
 hostname spine-2
@@ -65,5 +68,8 @@ interface po3
 !
 interface lo0
   ip address 10.250.1.2/32
-  interface mgmt0
+!
+interface mgmt0
   ip address 10.250.254.3/24
+!
+!
