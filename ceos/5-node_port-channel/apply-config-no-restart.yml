@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  vars:
+  tasks: 
+
+  - name: add "{{ switch_name }}" to inventory
+    add_host:
+      name: "{{ switch_name }}"
+      ansible_connection: http_api 
+    changed_when: false
+
+  - name: load configuration from file
+    eos_config:
+      src: configs/{{ switch_name }}_portchannel.ios
