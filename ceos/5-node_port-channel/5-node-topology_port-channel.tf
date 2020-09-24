@@ -41,8 +41,8 @@ resource "docker_container" "spine-1" {
     external = 2221
   }
   ports {
-    internal 443
-    external 8001
+    internal = 443
+    external = 8001
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=spine-1' apply-config-mod.yml"
@@ -75,8 +75,8 @@ resource "docker_container" "spine-2" {
     external = 2222
   }
   ports {
-    internal 443
-    external 8002
+    internal = 443
+    external = 8002
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=spine-2' apply-config-mod.yml"
@@ -109,8 +109,8 @@ resource "docker_container" "leaf-1" {
     external = 2223
   }
   ports {
-    internal 443
-    external 8003
+    internal = 443
+    external = 8003
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=leaf-1' apply-config-mod.yml"
@@ -143,8 +143,8 @@ resource "docker_container" "leaf-2" {
     external = 2224
   }
   ports {
-    internal 443
-    external 8004
+    internal = 443
+    external = 8004
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=leaf-2' apply-config-mod.yml"
@@ -177,8 +177,8 @@ resource "docker_container" "leaf-3" {
     external = 2225
   }
   ports {
-    internal 443
-    external 8005
+    internal = 443
+    external = 8005
   }
   provisioner "local-exec" {
     command = "ansible-playbook -e 'switch_name=leaf-3' apply-config-mod.yml"
