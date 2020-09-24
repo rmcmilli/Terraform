@@ -9,6 +9,9 @@ ip routing
 !
 spanning-tree mode rapid-pvst
 !
+username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
+!
+!
 vlan 101
 !
 vlan 102
