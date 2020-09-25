@@ -25,4 +25,4 @@
       backup: yes
       backup_options:
         dir_path: /configs
-        filename: {{ switch_name }}_running-config.ios
+        filename: "{{ switch_name }}"_running-config.ios
