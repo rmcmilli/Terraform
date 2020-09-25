@@ -24,5 +24,5 @@
     eos_config:
       backup: yes
       backup_options:
-        dir_path: /configs
-        filename: "{{ switch_name }}"_running-config.ios
+        dir_path: configs
+        filename: "{{ switch_name }}_running-config.cfg"
