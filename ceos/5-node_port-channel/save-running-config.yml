@@ -21,6 +21,7 @@
     
       - name: Backup running-config
         delegate_to: "{{ switch_name }}"
-        backup: True
+        backup: yes
         backup_options:
-          dir_path: configs/{{ switch_name }}_running-config.ios
+          dir_path: configs
+          filename: /{{ switch_name }}_running-config.ios
