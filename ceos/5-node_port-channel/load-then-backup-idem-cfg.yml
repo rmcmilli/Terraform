@@ -29,5 +29,4 @@
     eos_config:
       backup: yes
       backup_options:
-        dir_path: configs
         filename: "{{ conf_file }}"
