@@ -41,7 +41,7 @@ interface eth3
 !  no switchport 
 !  ip address 10.250.0.9/30
 !
-int po1
+interface po1
   no switchport
   ip address 10.250.0.2/30
   !switchport mode trunk 
