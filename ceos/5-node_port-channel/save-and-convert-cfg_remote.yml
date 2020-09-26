@@ -23,12 +23,12 @@
 
   - name: print path to console
     ansible.builtin.debug:
-      msg: Path is "{{ playbook_dir }}/{{ conf_file }}"
+      msg: Path is "{{ playbook_dir }}/configs/{{ conf_file }}"
 
   - name: load configuration from file
     delegate_to: "{{ switch_name }}"
     eos_config:
-      src: "{{ playbook_dir }}/{{ conf_file }}"
+      src: "{{ playbook_dir }}/configs/{{ conf_file }}"
 
   - name: save running-config
     delegate_to: "{{ switch_name }}"
