@@ -6,7 +6,7 @@ provider "docker" {
 
 # Create single ceos containter
 resource "docker_container" "spine-1" {
-  image = "${docker_image.ceos.latest}"
+  image = docker_image.ceos.latest
   name  = "spine-1"
   #hostname = "ceos_test"
   attach     = "false"
