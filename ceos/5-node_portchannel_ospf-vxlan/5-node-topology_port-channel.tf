@@ -104,6 +104,12 @@ resource "docker_container" "leaf-1" {
   networks_advanced {
     name = docker_network.eth7.name
   }
+  networks_advanced {
+    name = docker_network.eth10.name
+  }
+  networks_advanced {
+    name = docker_network.eth11.name
+  }
   ports {
     internal = 22
     external = 2223
@@ -138,6 +144,9 @@ resource "docker_container" "leaf-2" {
   networks_advanced {
     name = docker_network.eth8.name
   }
+  networks_advanced {
+    name = docker_network.eth12.name
+  }
   ports {
     internal = 22
     external = 2224
@@ -171,6 +180,9 @@ resource "docker_container" "leaf-3" {
   }
   networks_advanced {
     name = docker_network.eth9.name
+  }
+  networks_advanced {
+    name = docker_network.eth13.name
   }
   ports {
     internal = 22
