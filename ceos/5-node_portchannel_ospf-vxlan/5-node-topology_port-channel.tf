@@ -216,6 +216,11 @@ resource "docker_container" "host1_leaf1" {
     add = ["NET_ADMIN"]
   }
 }
+# Get latest ceos image
+resource "docker_image" "ceos" {
+  name = "ceos:latest"
+  keep_locally = "true"
+}
 resource "docker_network" "eth0" {
   name = "eth0"
   ipam_config {
