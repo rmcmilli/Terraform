@@ -211,7 +211,6 @@ resource "docker_container" "host1_leaf1" {
   restart = "always"
   networks_advanced {
     name = docker_network.eth10.name
-    ipv4_address = "10.0.10.2/24"
   }
   capabilities {
     add = ["NET_ADMIN"]
