@@ -223,7 +223,7 @@ resource "docker_image" "ceos" {
 }
 # Get latest host image
 resource "docker_image" "network-multitool" {
-  name "praqma/network-multitool:latest"
+  name = "praqma/network-multitool:latest"
   keep_locally = "true"
 }
 resource "docker_network" "eth0" {
