@@ -35,5 +35,5 @@
     eos_config:
       backup: yes
       backup_options:
-        dir_path: "{{ playbook_dir }}"
+        dir_path: "{{ playbook_dir }}/configs/"
         filename: "{{ conf_file }}"
