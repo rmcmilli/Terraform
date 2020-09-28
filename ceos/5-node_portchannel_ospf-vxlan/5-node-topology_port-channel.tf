@@ -196,6 +196,27 @@ resource "docker_container" "leaf-3" {
     command = "ansible-playbook -e 'switch_name=leaf-3' apply-config-mod.yml"
   }
 }
+resource "docker_container" "host1_leaf1" {
+  #image = "ubuntu:18.04"
+  # The image below is alpine-based with installed network tools
+  image    = "praqma/network-multitool:latest"
+  name     = "host1_leaf1"
+  hostname = "host1_leaf1"
+  attach   = "false"
+  logs     = "false"
+  #    command = ["sleep", "600"]
+  command = ["tail", "-f", "/dev/null"]
+  #    entrypoint = ["bash","ip route delete default via 192.168.20.1 dev eth0 && ip route add default via 192.168.20.254 dev eth0"]
+  start   = "true"
+  restart = "always"
+  networks_advanced {
+    name = docker_network.eth10.name
+    ipv4_address = "10.0.10.2/24"
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
 resource "docker_network" "eth0" {
   name = "eth0"
   ipam_config {
