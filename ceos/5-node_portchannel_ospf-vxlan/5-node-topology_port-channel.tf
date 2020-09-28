@@ -49,7 +49,7 @@ resource "docker_container" "spine-1" {
   }
 }
 resource "docker_container" "spine-2" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "spine-2"
   #hostname = "ceos_test"
   attach     = "false"
@@ -83,7 +83,7 @@ resource "docker_container" "spine-2" {
   }
 }
 resource "docker_container" "leaf-1" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "leaf-1"
   #hostname = "ceos_test"
   attach     = "false"
@@ -123,7 +123,7 @@ resource "docker_container" "leaf-1" {
   }
 }
 resource "docker_container" "leaf-2" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "leaf-2"
   #hostname = "ceos_test"
   attach     = "false"
@@ -160,7 +160,7 @@ resource "docker_container" "leaf-2" {
   }
 }
 resource "docker_container" "leaf-3" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "leaf-3"
   #hostname = "ceos_test"
   attach     = "false"
@@ -199,7 +199,7 @@ resource "docker_container" "leaf-3" {
 resource "docker_container" "host1_leaf1" {
   #image = "ubuntu:18.04"
   # The image below is alpine-based with installed network tools
-  image    = "praqma/network-multitool:latest"
+  image    = docker_image.network-multitool.latest
   name     = "host1_leaf1"
   hostname = "host1_leaf1"
   attach   = "false"
@@ -219,6 +219,11 @@ resource "docker_container" "host1_leaf1" {
 # Get latest ceos image
 resource "docker_image" "ceos" {
   name = "ceos:latest"
+  keep_locally = "true"
+}
+# Get latest host image
+resource "docker_image" "network-multitool" {
+  name "praqma/network-multitool:latest"
   keep_locally = "true"
 }
 resource "docker_network" "eth0" {
