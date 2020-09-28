@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  vars:
+  tasks: 
+
+  - name: add "{{ switch_name }}" to inventory
+    add_host:
+      name: "{{ switch_name }}"
+      ansible_connection: docker
+    changed_when: false
+
+  - name: load configuration on "{{ switch_name }}"
+    delegate_to: "{{ switch_name }}"
+    copy:
+      src: configs/{{ switch_name }}_portchannel.ios
+      dest: /mnt/flash/startup-config
+
+  - name: restart "{{ switch_name }}"
+    shell: docker restart "{{ switch_name }}" 
+    

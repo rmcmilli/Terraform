@@ -1,0 +1,64 @@
+!
+!
+hostname leaf-3
+!
+management api http-commands
+  no shutdown
+!
+spanning-tree mode rapid-pvst
+!
+username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
+!
+!
+ip routing
+!
+vlan 103
+!
+vlan 106
+!
+router ospf 100
+!
+  redistribute connected
+  !
+  network 10.250.0.0/23 area 0
+  !
+  log-adjacency-changes detail
+!
+interface eth1
+  channel-group 1 mode on
+!  switchport mode trunk
+!  switchport trunk vlan allowed 1,103
+!  ip address 10.250.0.10/30
+!
+interface eth2
+  channel-group 1 mode on
+!  switchport mode trunk
+!  switchport trunk vlan allowed 1,106
+!  ip address 10.250.0.22/30
+!
+!interface eth3
+  channel-group 2 mode on
+!  no switchport 
+!  ip address 10.250.0.9/30
+!
+interface po1
+  no switchport 
+  ip address 10.250.0.10/30
+!
+interface po2
+  no switchport 
+  ip address 10.250.0.22/30
+!
+!interface vlan 103
+!  ip address 10.250.0.10/30
+!
+!interface vlan 106
+!  ip address 10.250.0.22/30
+!
+interface lo0
+  ip address 10.250.1.5/32
+!
+interface Management0
+  ip address 10.250.254.6/24
+!
+!
