@@ -263,6 +263,28 @@ resource "docker_container" "host3_leaf2" {
     add = ["NET_ADMIN"]
   }
 }
+resource "docker_container" "host4_leaf3" {
+  # The image below is alpine-based with installed network tools
+  image    = docker_image.network-multitool.latest
+  name     = "host4_leaf3"
+  hostname = "host4_leaf3"
+  attach   = "false"
+  logs     = "false"
+  command = ["./host4-int.sh"]
+  upload {
+    source = "host4-int.sh"
+    file = "host4-int.sh"
+    executable = "true"
+  }
+  start   = "true"
+  #restart = "always"
+  networks_advanced {
+    name = docker_network.eth13.name
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
 # Get latest ceos image
 resource "docker_image" "ceos" {
   name = "ceos:latest"

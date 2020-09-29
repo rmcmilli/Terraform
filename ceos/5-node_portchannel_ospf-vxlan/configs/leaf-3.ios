@@ -11,7 +11,7 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 20,103,106
+vlan 20,30,103,106
 !
 interface Port-Channel1
    no switchport
@@ -25,12 +25,13 @@ interface Ethernet1
    channel-group 1 mode on
 !
 interface Ethernet2
-   channel-group 2 mode on
+   channel-group 1 mode on
 !
 interface Ethernet3
-   switchport access vlan 20
+   channel-group 2 mode on
 !
 interface Ethernet4
+   switchport access vlan 30
 !
 interface Loopback0
    ip address 10.250.1.5/32
@@ -45,7 +46,7 @@ interface Vxlan1
    vxlan multicast-group 227.10.1.1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
-   vxlan vlan 20 vni 20
+   vxlan vlan 30 vni 30
    vxlan flood vtep 10.250.3.1 10.250.3.3
 !
 ip routing
