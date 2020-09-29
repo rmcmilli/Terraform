@@ -208,7 +208,7 @@ resource "docker_container" "host1_leaf1" {
   #    command = ["sleep", "600"]
   #command = ["tail", "-f", "/dev/null"]
   #entrypoint = ["bash","ip addr add 10.0.10.2/24 dev eth0 && ip route delete default && ip route add default via 10.0.10.1 dev eth0"]
-  command = ["./host1-int.sh"]
+  command = ["./host1-int.sh &"]
   upload {
     source = "host1-int.sh"
     file = "host1-int.sh"
