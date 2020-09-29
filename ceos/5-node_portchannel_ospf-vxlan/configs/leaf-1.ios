@@ -50,10 +50,17 @@ interface Vlan20
 !
 interface Vlan101
 !
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10
+   vxlan vlan 20 vni 20
+!
 ip routing
 !
 router ospf 1
-   redistribute connected
+   passive-interface Vlan10
+   passive-interface Vlan20
    network 10.250.0.0/23 area 0.0.0.0
    max-lsa 12000
    log-adjacency-changes detail

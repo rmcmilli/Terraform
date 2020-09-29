@@ -198,7 +198,6 @@ resource "docker_container" "leaf-3" {
 }
 
 resource "docker_container" "host1_leaf1" {
-  #image = "ubuntu:18.04"
   # The image below is alpine-based with installed network tools
   image    = docker_image.network-multitool.latest
   name     = "host1_leaf1"
@@ -215,6 +214,28 @@ resource "docker_container" "host1_leaf1" {
   #restart = "always"
   networks_advanced {
     name = docker_network.eth10.name
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
+resource "docker_container" "host2_leaf1" {
+  # The image below is alpine-based with installed network tools
+  image    = docker_image.network-multitool.latest
+  name     = "host2_leaf1"
+  hostname = "host2_leaf1"
+  attach   = "false"
+  logs     = "false"
+  command = ["./host2-int.sh"]
+  upload {
+    source = "host2-int.sh"
+    file = "host2-int.sh"
+    executable = "true"
+  }
+  start   = "true"
+  #restart = "always"
+  networks_advanced {
+    name = docker_network.eth11.name
   }
   capabilities {
     add = ["NET_ADMIN"]
