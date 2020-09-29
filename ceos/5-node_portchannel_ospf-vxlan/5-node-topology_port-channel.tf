@@ -215,7 +215,7 @@ resource "docker_container" "host1_leaf1" {
     executable = "true"
   }
   start   = "true"
-  restart = "always"
+  restart = "false"
   networks_advanced {
     name = docker_network.eth10.name
   }
