@@ -196,7 +196,7 @@ resource "docker_container" "leaf-3" {
     command = "ansible-playbook -e 'switch_name=leaf-3' apply-config-mod.yml"
   }
 }
-/*
+
 resource "docker_container" "host1_leaf1" {
   #image = "ubuntu:18.04"
   # The image below is alpine-based with installed network tools
@@ -216,7 +216,7 @@ resource "docker_container" "host1_leaf1" {
   capabilities {
     add = ["NET_ADMIN"]
   }
-}*/
+}
 # Get latest ceos image
 resource "docker_image" "ceos" {
   name = "ceos:latest"
