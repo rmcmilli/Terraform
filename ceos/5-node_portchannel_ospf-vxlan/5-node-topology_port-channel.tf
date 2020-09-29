@@ -19,22 +19,22 @@ resource "docker_container" "spine-1" {
     ipv4_address = "10.250.254.2"
   }
   networks_advanced {
-    name = docker_network.eth1.name
+    name = docker_network.eth01.name
   }
   networks_advanced {
-    name = docker_network.eth2.name
+    name = docker_network.eth02.name
   }
   networks_advanced {
-    name = docker_network.eth3.name
+    name = docker_network.eth03.name
   }
   networks_advanced {
-    name = docker_network.eth4.name
+    name = docker_network.eth04.name
   }
   networks_advanced {
-    name = docker_network.eth5.name
+    name = docker_network.eth05.name
   }
   networks_advanced {
-    name = docker_network.eth6.name
+    name = docker_network.eth06.name
   }
   ports {
     internal = 22
@@ -62,13 +62,13 @@ resource "docker_container" "spine-2" {
     ipv4_address = "10.250.254.3"
   }
   networks_advanced {
-    name = docker_network.eth7.name
+    name = docker_network.eth07.name
   }
   networks_advanced {
-    name = docker_network.eth8.name
+    name = docker_network.eth08.name
   }
   networks_advanced {
-    name = docker_network.eth9.name
+    name = docker_network.eth09.name
   }
   ports {
     internal = 22
@@ -96,13 +96,13 @@ resource "docker_container" "leaf-1" {
     ipv4_address = "10.250.254.4"
   }
   networks_advanced {
-    name = docker_network.eth1.name
+    name = docker_network.eth01.name
   }  
   networks_advanced {
-    name = docker_network.eth2.name
+    name = docker_network.eth02.name
   }
   networks_advanced {
-    name = docker_network.eth7.name
+    name = docker_network.eth07.name
   }
   networks_advanced {
     name = docker_network.eth10.name
@@ -136,13 +136,13 @@ resource "docker_container" "leaf-2" {
     ipv4_address = "10.250.254.5"
   }
   networks_advanced {
-    name = docker_network.eth3.name
+    name = docker_network.eth03.name
   }
     networks_advanced {
-    name = docker_network.eth4.name
+    name = docker_network.eth04.name
   }
   networks_advanced {
-    name = docker_network.eth8.name
+    name = docker_network.eth08.name
   }
   networks_advanced {
     name = docker_network.eth12.name
@@ -173,13 +173,13 @@ resource "docker_container" "leaf-3" {
     ipv4_address = "10.250.254.6"
   }
   networks_advanced {
-    name = docker_network.eth5.name
+    name = docker_network.eth05.name
   }
   networks_advanced {
-    name = docker_network.eth6.name
+    name = docker_network.eth06.name
   }
   networks_advanced {
-    name = docker_network.eth9.name
+    name = docker_network.eth09.name
   }
   networks_advanced {
     name = docker_network.eth13.name
@@ -234,58 +234,58 @@ resource "docker_network" "eth0" {
     gateway = "10.250.254.1"
   }
 }
-resource "docker_network" "eth1" {  
-  name = "eth1"
+resource "docker_network" "eth01" {  
+  name = "eth01"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth1.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth01.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
-resource "docker_network" "eth2" {
-  name = "eth2"
+resource "docker_network" "eth02" {
+  name = "eth02"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth2.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth02.id, 0, 12)}/bridge/group_fwd_mask"
   }
   }
-resource "docker_network" "eth3" {
-  name = "eth3"
+resource "docker_network" "eth03" {
+  name = "eth03"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth3.id, 0, 12)}/bridge/group_fwd_mask"
-  }
-}
-resource "docker_network" "eth4" {
-  name = "eth4"
-  provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth4.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth03.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
-resource "docker_network" "eth5" {
-  name = "eth5"
+resource "docker_network" "eth04" {
+  name = "eth04"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth5.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth04.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
-resource "docker_network" "eth6" {
-  name = "eth6"
+resource "docker_network" "eth05" {
+  name = "eth05"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth6.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth05.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
-resource "docker_network" "eth7" {
-  name = "eth7"
+resource "docker_network" "eth06" {
+  name = "eth06"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth7.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth06.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
-resource "docker_network" "eth8" {
-  name = "eth8"
+resource "docker_network" "eth07" {
+  name = "eth07"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth8.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth07.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
-resource "docker_network" "eth9" {
-  name = "eth9"
+resource "docker_network" "eth08" {
+  name = "eth08"
   provisioner "local-exec" {
-    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth9.id, 0, 12)}/bridge/group_fwd_mask"
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth08.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+}
+resource "docker_network" "eth09" {
+  name = "eth09"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth09.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }
 resource "docker_network" "eth10" {
