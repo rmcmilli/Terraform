@@ -49,10 +49,6 @@ interface Loopback0
 interface Management0
    ip address 10.250.254.2/24
 !
-interface Vxlan1
-   vxlan source-interface Loopback0
-   vxlan udp-port 4789
-!
 ip routing
 !
 router ospf 1
@@ -60,7 +56,6 @@ router ospf 1
    network 10.250.0.0/23 area 0.0.0.0
    max-lsa 12000
    log-adjacency-changes detail
-   default-information originate always
 !
 management api http-commands
    no shutdown
