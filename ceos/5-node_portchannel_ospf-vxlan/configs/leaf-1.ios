@@ -11,7 +11,7 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 10,20,101,104
+vlan 10,20,30,101,104
 !
 vrf instance red
 !
@@ -55,7 +55,7 @@ interface Vlan20
    vrf forwarding red
    ip address 10.0.20.1/24
 !
-interface vlan30
+interface Vlan30
    vrf forwarding red
    ip address 10.0.30.1/24
 !
@@ -67,6 +67,7 @@ interface Vxlan1
    vxlan udp-port 4789
    vxlan vlan 10 vni 10
    vxlan vlan 20 vni 20
+   vxlan vlan 30 vni 30
    vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
 !
 ip routing
