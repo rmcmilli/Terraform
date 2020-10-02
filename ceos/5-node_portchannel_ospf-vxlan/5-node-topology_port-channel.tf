@@ -228,7 +228,7 @@ resource "docker_container" "host2_leaf1" {
   logs     = "false"
   command = ["./host2-int.sh"]
   upload {
-    source = "host2-int.sh"
+    source = "${path.module}/configs/host2-int.sh"
     file = "host2-int.sh"
     executable = "true"
   }
@@ -250,7 +250,7 @@ resource "docker_container" "host3_leaf2" {
   logs     = "false"
   command = ["./host3-int.sh"]
   upload {
-    source = "host3-int.sh"
+    source = "${path.module}/configs/host3-int.sh"
     file = "host3-int.sh"
     executable = "true"
   }
@@ -272,7 +272,7 @@ resource "docker_container" "host4_leaf3" {
   logs     = "false"
   command = ["./host4-int.sh"]
   upload {
-    source = "host4-int.sh"
+    source = "${path.module}/configs/host4-int.sh"
     file = "host4-int.sh"
     executable = "true"
   }
