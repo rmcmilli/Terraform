@@ -206,7 +206,7 @@ resource "docker_container" "host1_leaf1" {
   logs     = "false"
   command = ["./host1-int.sh"]
   upload {
-    source = "path.module/configs/host1-int.sh"
+    source = path.module"/configs/host1-int.sh"
     file = "host1-int.sh"
     executable = "true"
   }
