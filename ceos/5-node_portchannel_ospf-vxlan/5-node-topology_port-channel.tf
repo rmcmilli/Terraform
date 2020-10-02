@@ -45,7 +45,7 @@ resource "docker_container" "spine-1" {
     external = 8001
   }
   provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=spine-1' apply-config-mod.yml"
+    command = "ansible-playbook -e 'switch_name=spine-1' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_container" "spine-2" {
