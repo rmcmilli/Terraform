@@ -21,10 +21,7 @@
       ansible_become_method: enable
     changed_when: false
 
-  - name: save running-config
+  - name: load configuration from file
     delegate_to: "{{ switch_name }}"
     eos_config:
-      backup: yes
-      backup_options:
-        dir_path: "{{ playbook_dir }}/configs"
-        filename: "{{ switch_name }}.ios"
+      src: "{{ playbook_dir }}/../configs/{{ conf_file }}"

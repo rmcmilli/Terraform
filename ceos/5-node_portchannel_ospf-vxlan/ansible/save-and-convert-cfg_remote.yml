@@ -28,12 +28,12 @@
   - name: load configuration from file
     delegate_to: "{{ switch_name }}"
     eos_config:
-      src: "{{ playbook_dir }}/configs/{{ conf_file }}"
+      src: "{{ playbook_dir }}/../configs/{{ conf_file }}"
 
   - name: save running-config
     delegate_to: "{{ switch_name }}"
     eos_config:
       backup: yes
       backup_options:
-        dir_path: "{{ playbook_dir }}/configs/"
+        dir_path: "{{ playbook_dir }}/../configs/"
         filename: "{{ conf_file }}"
