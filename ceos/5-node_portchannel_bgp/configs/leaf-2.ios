@@ -15,6 +15,9 @@ username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7
 !
 vlan 10,102,105
 !
+!
+vrf instance prod
+!
 interface Port-Channel1
    no switchport
    ip address 10.250.0.6/30
@@ -40,17 +43,35 @@ interface Loopback0
 !
 interface Loopback1
    ip address 10.250.3.2/32
+   ip address 10.250.3.254/32 secondary
+   ip virtual-router mac-address 00:00:11:11:22:22
 !
 interface Management0
    ip address 10.250.254.5/24
+!
+!
+interface Vlan10
+   vrf prod
+   ip address virtual 10.0.10.1/24
+!
+interface Vlan20
+   vrf prod
+   ip address virtual 10.0.20.1/24
+!
+interface Vlan30
+   vrf prod
+   ip address virtual 10.0.30.1/24
 !
 interface Vxlan1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10 vni 10
+   vxlan vlan 20 vni 20
+   vxlan vlan 30 vni 30
    vxlan flood vtep 10.250.3.1 10.250.3.2
 !
 ip routing
+ip routing vrf prod
 !
 router bgp 64514
    neighbor 10.250.0.5 remote-as 64512
