@@ -1,0 +1,70 @@
+! Command: show running-config
+! device: spine-1 (cEOSLab, EOS-4.26.1F-22602519.4261F (engineering build))
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname spine-1
+!
+spanning-tree mode rapid-pvst
+!
+no aaa root
+!
+username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
+!
+vlan 101-103
+!
+interface Port-Channel1
+   no switchport
+   ip address 10.250.0.1/30
+!
+interface Port-Channel2
+   no switchport
+   ip address 10.250.0.5/30
+!
+interface Port-Channel3
+   no switchport
+   ip address 10.250.0.9/30
+!
+interface Ethernet1
+   channel-group 1 mode on
+!
+interface Ethernet2
+   channel-group 1 mode on
+!
+interface Ethernet3
+   channel-group 2 mode on
+!
+interface Ethernet4
+   channel-group 2 mode on
+!
+interface Ethernet5
+   channel-group 3 mode on
+!
+interface Ethernet6
+   channel-group 3 mode on
+!
+interface Loopback0
+   ip address 10.250.1.1/32
+!
+interface Management0
+   ip address 10.250.254.2/24
+!
+ip routing
+!
+router bgp 64512
+   neighbor 10.250.0.2 remote-as 64513
+   neighbor 10.250.0.2 allowas-in 3
+   neighbor 10.250.0.6 remote-as 64514
+   neighbor 10.250.0.6 allowas-in 3
+   neighbor 10.250.0.10 remote-as 64515
+   neighbor 10.250.0.10 allowas-in 3
+   neighbor 10.250.1.2 remote-as 64512
+   network 10.250.0.0/23
+   redistribute connected
+!
+management api http-commands
+   no shutdown
+!
+end

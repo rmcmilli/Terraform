@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  vars:
+  tasks: 
+
+  - name: add "{{ switch_name }}" to inventory
+    add_host:
+      name: "{{ switch_name }}"
+      ansible_connection: httpapi
+      ansible_host: 10.10.0.180
+      ansible_httpapi_port: "{{ port_number }}"
+      transport: eapi
+      ansible_user: admin
+      ansible_password: "password1!"
+      ansible_network_os: eos
+      ansible_command_timeout: 45
+      ansible_host_key_checking: False
+      ansible_httpapi_use_ssl: True
+      ansible_httpapi_validate_certs: False
+      ansible_become: True
+      ansible_become_method: enable
+    changed_when: false
+
+  - name: load configuration from file
+    delegate_to: "{{ switch_name }}"
+    eos_config:
+      src: "{{ playbook_dir }}/../configs/{{ conf_file }}"
