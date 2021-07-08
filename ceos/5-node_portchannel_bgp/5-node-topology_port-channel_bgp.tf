@@ -6,7 +6,7 @@ provider "docker" {
 
 # Create single ceos containter
 resource "docker_container" "spine-1" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "spine-1"
   #hostname = "ceos_test"
   attach     = "false"
@@ -16,20 +16,40 @@ resource "docker_container" "spine-1" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
+    ipv4_address = "10.250.254.2"
   }
   networks_advanced {
-    name = docker_network.eth1.name
+    name = docker_network.eth01.name
   }
   networks_advanced {
-    name = docker_network.eth2.name
+    name = docker_network.eth02.name
   }
   networks_advanced {
-    name = docker_network.eth3.name
+    name = docker_network.eth03.name
   }
-  
+  networks_advanced {
+    name = docker_network.eth04.name
+  }
+  networks_advanced {
+    name = docker_network.eth05.name
+  }
+  networks_advanced {
+    name = docker_network.eth06.name
+  }
+  ports {
+    internal = 22
+    external = 2221
+  }
+  ports {
+    internal = 443
+    external = 8001
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -e 'switch_name=spine-1' ansible/apply-config-mod.yml"
+  }
 }
 resource "docker_container" "spine-2" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "spine-2"
   #hostname = "ceos_test"
   attach     = "false"
@@ -39,19 +59,31 @@ resource "docker_container" "spine-2" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
+    ipv4_address = "10.250.254.3"
   }
   networks_advanced {
-    name = docker_network.eth4.name
+    name = docker_network.eth07.name
   }
   networks_advanced {
-    name = docker_network.eth5.name
+    name = docker_network.eth08.name
   }
   networks_advanced {
-    name = docker_network.eth6.name
+    name = docker_network.eth09.name
+  }
+  ports {
+    internal = 22
+    external = 2222
+  }
+  ports {
+    internal = 443
+    external = 8002
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -e 'switch_name=spine-2' ansible/apply-config-mod.yml"
   }
 }
 resource "docker_container" "leaf-1" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "leaf-1"
   #hostname = "ceos_test"
   attach     = "false"
@@ -61,19 +93,37 @@ resource "docker_container" "leaf-1" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
+    ipv4_address = "10.250.254.4"
   }
   networks_advanced {
-    name = docker_network.eth1.name
+    name = docker_network.eth01.name
   }  
   networks_advanced {
-    name = docker_network.eth4.name
+    name = docker_network.eth02.name
   }
-  /*networks_advanced {
-    name = docker_network.eth7.name
-  }*/
+  networks_advanced {
+    name = docker_network.eth07.name
+  }
+  networks_advanced {
+    name = docker_network.eth10.name
+  }
+  networks_advanced {
+    name = docker_network.eth11.name
+  }
+  ports {
+    internal = 22
+    external = 2223
+  }
+  ports {
+    internal = 443
+    external = 8003
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -e 'switch_name=leaf-1' ansible/apply-config-mod.yml"
+  }
 }
 resource "docker_container" "leaf-2" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "leaf-2"
   #hostname = "ceos_test"
   attach     = "false"
@@ -83,19 +133,34 @@ resource "docker_container" "leaf-2" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
+    ipv4_address = "10.250.254.5"
   }
   networks_advanced {
-    name = docker_network.eth2.name
+    name = docker_network.eth03.name
   }
     networks_advanced {
-    name = docker_network.eth5.name
+    name = docker_network.eth04.name
   }
-  /*networks_advanced {
-    name = docker_network.eth8.name
-  }*/
+  networks_advanced {
+    name = docker_network.eth08.name
+  }
+  networks_advanced {
+    name = docker_network.eth12.name
+  }
+  ports {
+    internal = 22
+    external = 2224
+  }
+  ports {
+    internal = 443
+    external = 8004
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -e 'switch_name=leaf-2' ansible/apply-config-mod.yml"
+  }
 }
 resource "docker_container" "leaf-3" {
-  image = "ceos:latest"
+  image = docker_image.ceos.latest
   name  = "leaf-3"
   #hostname = "ceos_test"
   attach     = "false"
@@ -105,56 +170,213 @@ resource "docker_container" "leaf-3" {
   start      = "true"
   networks_advanced {
     name = docker_network.eth0.name
+    ipv4_address = "10.250.254.6"
   }
   networks_advanced {
-    name = docker_network.eth3.name
+    name = docker_network.eth05.name
   }
   networks_advanced {
-    name = docker_network.eth6.name
+    name = docker_network.eth06.name
   }
-/*  networks_advanced {
-    name = docker_network.eth9.name
-  }*/
+  networks_advanced {
+    name = docker_network.eth09.name
+  }
+  networks_advanced {
+    name = docker_network.eth13.name
+  }
+  ports {
+    internal = 22
+    external = 2225
+  }
+  ports {
+    internal = 443
+    external = 8005
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook -e 'switch_name=leaf-3' ansible/apply-config-mod.yml"
+  }
+}
+
+resource "docker_container" "host1_leaf1" {
+  # The image below is alpine-based with installed network tools
+  image    = docker_image.network-multitool.latest
+  name     = "host1_leaf1"
+  hostname = "host1_leaf1"
+  attach   = "false"
+  logs     = "false"
+  command = ["./host1-int.sh"]
+  upload {
+    source = "${path.module}/configs/host1-int.sh"
+    file = "host1-int.sh"
+    executable = "true"
+  }
+  start   = "true"
+  #restart = "always"
+  networks_advanced {
+    name = docker_network.eth10.name
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
+resource "docker_container" "host2_leaf1" {
+  # The image below is alpine-based with installed network tools
+  image    = docker_image.network-multitool.latest
+  name     = "host2_leaf1"
+  hostname = "host2_leaf1"
+  attach   = "false"
+  logs     = "false"
+  command = ["./host2-int.sh"]
+  upload {
+    source = "${path.module}/configs/host2-int.sh"
+    file = "host2-int.sh"
+    executable = "true"
+  }
+  start   = "true"
+  #restart = "always"
+  networks_advanced {
+    name = docker_network.eth11.name
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
+resource "docker_container" "host3_leaf2" {
+  # The image below is alpine-based with installed network tools
+  image    = docker_image.network-multitool.latest
+  name     = "host3_leaf2"
+  hostname = "host3_leaf2"
+  attach   = "false"
+  logs     = "false"
+  command = ["./host3-int.sh"]
+  upload {
+    source = "${path.module}/configs/host3-int.sh"
+    file = "host3-int.sh"
+    executable = "true"
+  }
+  start   = "true"
+  #restart = "always"
+  networks_advanced {
+    name = docker_network.eth12.name
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
+resource "docker_container" "host4_leaf3" {
+  # The image below is alpine-based with installed network tools
+  image    = docker_image.network-multitool.latest
+  name     = "host4_leaf3"
+  hostname = "host4_leaf3"
+  attach   = "false"
+  logs     = "false"
+  command = ["./host4-int.sh"]
+  upload {
+    source = "${path.module}/configs/host4-int.sh"
+    file = "host4-int.sh"
+    executable = "true"
+  }
+  start   = "true"
+  #restart = "always"
+  networks_advanced {
+    name = docker_network.eth13.name
+  }
+  capabilities {
+    add = ["NET_ADMIN"]
+  }
+}
+# Get latest ceos image
+resource "docker_image" "ceos" {
+  name = "ceos:latest"
+  keep_locally = "true"
+}
+# Get latest host image
+resource "docker_image" "network-multitool" {
+  name = "praqma/network-multitool:latest"
+  keep_locally = "true"
 }
 resource "docker_network" "eth0" {
   name = "eth0"
+  ipam_config {
+    subnet = "10.250.254.0/24"
+    gateway = "10.250.254.1"
+  }
 }
-resource "docker_network" "eth1" {
-  name = "eth1"
+resource "docker_network" "eth01" {  
+  name = "eth01"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth01.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth2" {
-  name = "eth2"
+resource "docker_network" "eth02" {
+  name = "eth02"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth02.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+  }
+resource "docker_network" "eth03" {
+  name = "eth03"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth03.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth3" {
-  name = "eth3"
+resource "docker_network" "eth04" {
+  name = "eth04"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth04.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth4" {
-  name = "eth4"
+resource "docker_network" "eth05" {
+  name = "eth05"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth05.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth5" {
-  name = "eth5"
+resource "docker_network" "eth06" {
+  name = "eth06"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth06.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth6" {
-  name = "eth6"
+resource "docker_network" "eth07" {
+  name = "eth07"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth07.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth7" {
-  name = "eth7"
+resource "docker_network" "eth08" {
+  name = "eth08"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth08.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
-resource "docker_network" "eth8" {
-  name = "eth8"
-}
-resource "docker_network" "eth9" {
-  name = "eth9"
+resource "docker_network" "eth09" {
+  name = "eth09"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth09.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
 resource "docker_network" "eth10" {
   name = "eth10"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth10.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
 resource "docker_network" "eth11" {
   name = "eth11"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth11.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
 resource "docker_network" "eth12" {
   name = "eth12"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth12.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
 resource "docker_network" "eth13" {
   name = "eth13"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth13.id, 0, 12)}/bridge/group_fwd_mask"
+  }
 }
