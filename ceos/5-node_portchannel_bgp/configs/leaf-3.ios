@@ -67,7 +67,7 @@ interface Vxlan1
    vxlan vlan 10 vni 10
    vxlan vlan 20 vni 20
    vxlan vlan 30 vni 30
-   vxlan flood vtep 10.250.3.1 10.250.3.3
+   vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
 !
 ip routing
 ip routing vrf prod
