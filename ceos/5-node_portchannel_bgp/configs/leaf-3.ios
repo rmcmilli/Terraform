@@ -1,7 +1,9 @@
 ! Command: show running-config
-! device: leaf-3 (cEOSLab, EOS-4.22.0.1F)
+! device: leaf-3 (cEOSLab, EOS-4.26.1F-22602519.4261F (engineering build))
 !
 transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
 !
 hostname leaf-3
 !
@@ -43,36 +45,21 @@ interface Management0
    ip address 10.250.254.6/24
 !
 interface Vxlan1
-   vxlan multicast-group 227.10.1.1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 30 vni 30
    vxlan flood vtep 10.250.3.1 10.250.3.3
 !
 ip routing
-! !
-! router ospf 100
-!    network 10.250.0.0/23 area 0.0.0.0
-!    network 10.250.3.0/24 area 0.0.0.0
-!    max-lsa 12000
-!    log-adjacency-changes detail
-! !
-management api http-commands
-   no shutdown
 !
 router bgp 64515
+   neighbor 10.250.0.9 remote-as 64512
+   neighbor 10.250.0.21 remote-as 64512
+   network 10.250.0.0/23
+   network 10.250.3.0/24
+   redistribute connected
 !
-  redistribute connected
-  !
-  neighbor 10.250.0.9 remote-as 64512
-  !
-  neighbor 10.250.0.21 remote-as 64512
-  !
-  address-family ipv4
-  !
-  network 10.250.0.0/23 
-  !
-  network 10.250.3.0/24
-  !
+management api http-commands
+   no shutdown
 !
 end

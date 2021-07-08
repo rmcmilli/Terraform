@@ -7,7 +7,7 @@
     add_host:
       name: "{{ switch_name }}"
       ansible_connection: httpapi
-      ansible_host: 10.10.0.180
+      ansible_host: localhost
       ansible_httpapi_port: "{{ port_number }}"
       transport: eapi
       ansible_user: admin
@@ -27,4 +27,4 @@
       backup: yes
       backup_options:
         dir_path: "{{ playbook_dir }}/../configs"
-        filename: "{{ switch_name }}.ios"
+        filename: "{{ switch_name }}_running.ios"

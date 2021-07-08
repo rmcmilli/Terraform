@@ -22,4 +22,4 @@
   - name: load configuration from file
     delegate_to: "{{ switch_name }}"
     eos_config:
-      src: "{{ playbook_dir }}/../configs/{{ switch_name }}_portchannel.ios"
+      src: "{{ playbook_dir }}/../configs/{{ switch_name }}.ios"

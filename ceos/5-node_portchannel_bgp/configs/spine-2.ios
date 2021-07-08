@@ -1,7 +1,9 @@
 ! Command: show running-config
-! device: spine-2 (cEOSLab, EOS-4.22.0.1F)
+! device: spine-2 (cEOSLab, EOS-4.26.1F-22602519.4261F (engineering build))
 !
 transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
 !
 hostname spine-2
 !
@@ -40,38 +42,18 @@ interface Management0
 !
 ip routing
 !
-! router ospf 100
-!    redistribute connected
-!    network 10.250.0.0/23 area 0.0.0.0
-!    max-lsa 12000
-!    log-adjacency-changes detail
-! !
+router bgp 64512
+   neighbor 10.250.0.14 remote-as 64513
+   neighbor 10.250.0.14 allowas-in 3
+   neighbor 10.250.0.18 remote-as 64514
+   neighbor 10.250.0.18 allowas-in 3
+   neighbor 10.250.0.22 remote-as 64515
+   neighbor 10.250.0.22 allowas-in 3
+   neighbor 10.250.1.1 remote-as 64512
+   network 10.250.0.0/23
+   redistribute connected
+!
 management api http-commands
    no shutdown
-!
-!
-router bgp 64512
-!
-  redistribute connected
-  !
-  neighbor 10.250.1.1 remote-as 64512
-  !
-  neighbor 10.250.0.14 remote-as 64513
-  !
-  neighbor 10.250.0.14 allowas-in
-  !
-  neighbor 10.250.0.18 remote-as 64514
-  !
-  neighbor 10.250.0.18 allowas-in
-  !
-  neighbor 10.250.0.22 remote-as 64515
-  !
-  neighbor 10.250.0.22 allowas-in
-  !
-  address-family ipv4
-  !
-  network 10.250.0.0/23 
-  !
-  !
 !
 end
