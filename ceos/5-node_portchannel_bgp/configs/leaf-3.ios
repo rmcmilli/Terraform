@@ -48,15 +48,15 @@ interface Loopback1
 interface Management0
    ip address 10.250.254.6/24
 !
-! !
-! interface Vlan10
-!    vrf prod
-!    ip address virtual 10.0.10.1/24
-! !
-! interface Vlan20
-!    vrf prod
-!    ip address virtual 10.0.20.1/24
-! !
+!
+interface Vlan10
+   vrf prod
+   ip address virtual 10.0.10.1/24
+!
+interface Vlan20
+   vrf prod
+   ip address virtual 10.0.20.1/24
+!
 interface Vlan30
    vrf prod
    ip address virtual 10.0.30.1/24

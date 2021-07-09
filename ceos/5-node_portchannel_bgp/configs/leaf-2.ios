@@ -13,7 +13,7 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 10,102,105
+vlan 10,20,30,102,105
 !
 !
 vrf instance prod
@@ -54,13 +54,13 @@ interface Vlan10
    vrf prod
    ip address virtual 10.0.10.1/24
 !
-! interface Vlan20
-!    vrf prod
-!    ip address virtual 10.0.20.1/24
-! !
-! interface Vlan30
-!    vrf prod
-!    ip address virtual 10.0.30.1/24
+interface Vlan20
+   vrf prod
+   ip address virtual 10.0.20.1/24
+!
+interface Vlan30
+   vrf prod
+   ip address virtual 10.0.30.1/24
 !
 interface Vxlan1
    vxlan source-interface Loopback1

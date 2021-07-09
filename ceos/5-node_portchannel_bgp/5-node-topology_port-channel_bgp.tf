@@ -4,7 +4,7 @@ provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 
-# Create single ceos containter
+# Create single ceos container
 resource "docker_container" "spine-1" {
   image = docker_image.ceos.latest
   name  = "spine-1"
@@ -44,9 +44,13 @@ resource "docker_container" "spine-1" {
     internal = 443
     external = 8001
   }
-  provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=spine-1' ansible/apply-config-mod.yml"
+  upload {
+    source = "${path.module}/configs/spine-1.ios"
+    file = "/mnt/flash/startup-config"
   }
+  # provisioner "local-exec" {
+  #   command = "ansible-playbook -e 'switch_name=spine-1' ansible/apply-config-mod.yml"
+  # }
 }
 resource "docker_container" "spine-2" {
   image = docker_image.ceos.latest
@@ -78,9 +82,13 @@ resource "docker_container" "spine-2" {
     internal = 443
     external = 8002
   }
-  provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=spine-2' ansible/apply-config-mod.yml"
+  upload {
+    source = "${path.module}/configs/spine-2.ios"
+    file = "/mnt/flash/startup-config"
   }
+  # provisioner "local-exec" {
+  #   command = "ansible-playbook -e 'switch_name=spine-2' ansible/apply-config-mod.yml"
+  # }
 }
 resource "docker_container" "leaf-1" {
   image = docker_image.ceos.latest
@@ -118,9 +126,13 @@ resource "docker_container" "leaf-1" {
     internal = 443
     external = 8003
   }
-  provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=leaf-1' ansible/apply-config-mod.yml"
+  upload {
+    source = "${path.module}/configs/leaf-1.ios"
+    file = "/mnt/flash/startup-config"
   }
+  # provisioner "local-exec" {
+  #   command = "ansible-playbook -e 'switch_name=leaf-1' ansible/apply-config-mod.yml"
+  # }
 }
 resource "docker_container" "leaf-2" {
   image = docker_image.ceos.latest
@@ -155,9 +167,13 @@ resource "docker_container" "leaf-2" {
     internal = 443
     external = 8004
   }
-  provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=leaf-2' ansible/apply-config-mod.yml"
+  upload {
+    source = "${path.module}/configs/leaf-2.ios"
+    file = "/mnt/flash/startup-config"
   }
+  # provisioner "local-exec" {
+  #   command = "ansible-playbook -e 'switch_name=leaf-2' ansible/apply-config-mod.yml"
+  # }
 }
 resource "docker_container" "leaf-3" {
   image = docker_image.ceos.latest
@@ -192,9 +208,13 @@ resource "docker_container" "leaf-3" {
     internal = 443
     external = 8005
   }
-  provisioner "local-exec" {
-    command = "ansible-playbook -e 'switch_name=leaf-3' ansible/apply-config-mod.yml"
+  upload {
+    source = "${path.module}/configs/leaf-3.ios"
+    file = "/mnt/flash/startup-config"
   }
+  # provisioner "local-exec" {
+  #   command = "ansible-playbook -e 'switch_name=leaf-3' ansible/apply-config-mod.yml"
+  # }
 }
 
 resource "docker_container" "host1_leaf1" {

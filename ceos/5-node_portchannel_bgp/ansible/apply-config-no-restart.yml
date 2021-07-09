@@ -17,6 +17,7 @@
       ansible_httpapi_use_ssl: True
       ansible_httpapi_validate_certs: False
       ansible_become: True
+      ansible_become_method: enable
     changed_when: false
 
   - name: load configuration from file
