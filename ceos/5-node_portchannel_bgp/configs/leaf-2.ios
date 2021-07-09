@@ -3,7 +3,7 @@
 !
 transceiver qsfp default-mode 4x10G
 !
-service routing protocols model ribd
+service routing protocols model multi-agent
 !
 hostname leaf-2
 !
@@ -54,13 +54,13 @@ interface Vlan10
    vrf prod
    ip address virtual 10.0.10.1/24
 !
-interface Vlan20
-   vrf prod
-   ip address virtual 10.0.20.1/24
-!
-interface Vlan30
-   vrf prod
-   ip address virtual 10.0.30.1/24
+! interface Vlan20
+!    vrf prod
+!    ip address virtual 10.0.20.1/24
+! !
+! interface Vlan30
+!    vrf prod
+!    ip address virtual 10.0.30.1/24
 !
 interface Vxlan1
    vxlan source-interface Loopback1
@@ -116,6 +116,7 @@ router bgp 64514
       rd 10.250.3.2:1000
       route-target import 1000:1000
       route-target export 1000:1000
+      redistribute connected
 !
 !
 management api http-commands

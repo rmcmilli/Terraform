@@ -3,7 +3,7 @@
 !
 transceiver qsfp default-mode 4x10G
 !
-service routing protocols model ribd
+service routing protocols model multi-agent
 !
 hostname leaf-1
 !
@@ -13,7 +13,7 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 10,20,30,101,104
+vlan 10,20,101,104
 !
 vrf instance prod
 !
@@ -59,9 +59,9 @@ interface Vlan20
    vrf prod
    ip address virtual 10.0.20.1/24
 !
-interface Vlan30
-   vrf prod
-   ip address virtual 10.0.30.1/24
+! interface Vlan30
+!    vrf prod
+!    ip address virtual 10.0.30.1/24
 !
 interface Vlan101
 !
@@ -119,6 +119,7 @@ router bgp 64513
       rd 10.250.3.1:1000
       route-target import 1000:1000
       route-target export 1000:1000
+      redistribute connected
 !
 management api http-commands
    no shutdown
