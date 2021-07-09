@@ -67,7 +67,8 @@ interface Vxlan1
    vxlan vlan 10 vni 10
    vxlan vlan 20 vni 20
    vxlan vlan 30 vni 30
-   vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
+   vxlan vrf prod vni 1000
+!   vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
 !
 ip routing
 ip routing vrf prod
@@ -78,6 +79,43 @@ router bgp 64515
    network 10.250.0.0/23
    network 10.250.3.0/24
    redistribute connected
+   !
+   vlan 10
+      rd 10.250.3.3:1010
+      route-target both 1010:1010
+      redistribute learned 
+      !
+   vlan 20
+      rd 10.250.3.3:1020
+      route-target both 1020:1020
+      redistribute learned 
+      !
+   vlan 30
+      rd 10.250.3.3:1030
+      route-target both 1030:1030
+      redistribute learned 
+      !  
+   !
+   neighbor SPINE_EVPN peer group
+   neighbor SPINE_EVPN update-source Loopback1
+   neighbor SPINE_EVPN ebgp-multihop 3
+   neighbor SPINE_EVPN send-community extended
+   neighbor SPINE_EVPN maximum-routes 12000
+   neighbor SPINE_EVPN remote-as 64512
+   neighbor 10.250.3.4 peer group SPINE_EVPN
+   neighbor 10.250.3.5 peer group SPINE_EVPN
+   !
+   address-family evpn
+      neighbor SPINE_EVPN activate
+   !
+   address-family ipv4
+      no neighbor SPINE_EVPN activate
+   !
+   vrf prod
+      rd 10.250.3.3:1000
+      route-target import 1000:1000
+      route-target export 1000:1000
+!
 !
 management api http-commands
    no shutdown
