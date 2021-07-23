@@ -72,6 +72,31 @@ router ospf 1
    max-lsa 12000
    log-adjacency-changes detail
 !
+router bgp 64512
+!
+   neighbor LEAF_EVPN peer group
+   neighbor LEAF_EVPN update-source Loopback1
+   neighbor LEAF_EVPN ebgp-multihop 5
+   neighbor LEAF_EVPN send-community extended
+   neighbor LEAF_EVPN next-hop-unchanged
+   neighbor LEAF_EVPN maximum-routes 12000
+   neighbor 10.250.3.1 peer group LEAF_EVPN
+   neighbor 10.250.3.1 remote-as 64513
+   neighbor 10.250.3.2 peer group LEAF_EVPN
+   neighbor 10.250.3.2 remote-as 64514
+   neighbor 10.250.3.3 peer group LEAF_EVPN
+   neighbor 10.250.3.3 remote-as 64515
+   !
+   address-family evpn
+      neighbor LEAF_EVPN activate
+   !
+   address-family ipv4
+      no neighbor LEAF_EVPN activate
+   !
+   address-family ipv6
+      no neighbor LEAF_EVPN activate
+   !
+!
 management api http-commands
    no shutdown
 !

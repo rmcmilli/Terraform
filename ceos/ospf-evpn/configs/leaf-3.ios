@@ -13,7 +13,9 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 20,30,103,106
+vrf instance prod
+!
+vlan 30
 !
 interface Port-Channel1
    no switchport
@@ -40,6 +42,7 @@ interface Ethernet3
 !
 interface Ethernet4
    switchport access vlan 30
+   vrf prod
 !
 interface Loopback0
    ip address 10.250.1.5/32
@@ -47,24 +50,74 @@ interface Loopback0
 interface Loopback1
    ip address 10.250.3.3/32
    ip ospf area 0.0.0.0
+   ip address 10.250.3.254/32 secondary
+   ip virtual-router mac-address 00:00:11:11:22:22
 !
 interface Management0
    ip address 10.250.254.6/24
+!
+!
+interface Vlan30
+   vrf prod
+   ip address virtual 10.0.30.1/24
 !
 interface Vxlan1
 !   vxlan multicast-group 227.10.1.1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 30 vni 30
-   vxlan flood vtep 10.250.3.1 10.250.3.3
+   vxlan vrf prod vni 1000
+!   vxlan flood vtep 10.250.3.1 10.250.3.3
 !
 ip routing
+ip routing vrf prod
 !
 router ospf 100
    !network 10.250.0.0/23 area 0.0.0.0
    network 10.250.3.0/24 area 0.0.0.0
    max-lsa 12000
    log-adjacency-changes detail
+!
+router bgp 64515
+   ! vlan 10
+   !    rd 10.250.3.3:1010
+   !    route-target both 1010:1010
+   !    redistribute learned 
+   !    !
+   ! vlan 20
+   !    rd 10.250.3.3:1020
+   !    route-target both 1020:1020
+   !    redistribute learned 
+   !    !
+   vlan 30
+      rd 10.250.3.3:1030
+      route-target both 1030:1030
+      redistribute learned 
+      !  
+   !
+   neighbor SPINE_EVPN peer group
+   neighbor SPINE_EVPN update-source Loopback1
+   neighbor SPINE_EVPN ebgp-multihop 3
+   neighbor SPINE_EVPN send-community extended
+   neighbor SPINE_EVPN maximum-routes 12000
+   neighbor SPINE_EVPN remote-as 64512
+   neighbor 10.250.3.4 peer group SPINE_EVPN
+   neighbor 10.250.3.5 peer group SPINE_EVPN
+   !
+   address-family evpn
+      neighbor SPINE_EVPN activate
+   !
+   address-family ipv4
+      no neighbor SPINE_EVPN activate
+   !
+   vrf prod
+      rd 10.250.3.3:1000
+      route-target import 1000:1000
+      route-target export 1000:1000
+      redistribute connected
+      !
+      neighbor 172.16.1.1 remote-as 64600
+   !
 !
 management api http-commands
    no shutdown
