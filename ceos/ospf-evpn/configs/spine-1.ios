@@ -3,6 +3,8 @@
 !
 transceiver qsfp default-mode 4x10G
 !
+service routing protocols model multi-agent
+!
 hostname spine-1
 !
 spanning-tree mode rapid-pvst
@@ -15,15 +17,24 @@ vlan 101-103
 !
 interface Port-Channel1
    no switchport
-   ip address 10.250.0.1/30
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.1/30
 !
 interface Port-Channel2
    no switchport
-   ip address 10.250.0.5/30
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.5/30
 !
 interface Port-Channel3
    no switchport
-   ip address 10.250.0.9/30
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.9/30
 !
 interface Ethernet1
    channel-group 1 mode on
@@ -46,6 +57,10 @@ interface Ethernet6
 interface Loopback0
    ip address 10.250.1.1/32
 !
+interface Loopback1
+   ip address 10.250.3.4/32
+   ip ospf area 0.0.0.0
+!
 interface Management0
    ip address 10.250.254.2/24
 !
@@ -53,7 +68,7 @@ ip routing
 !
 router ospf 1
    redistribute connected
-   network 10.250.0.0/23 area 0.0.0.0
+   !network 10.250.0.0/23 area 0.0.0.0
    max-lsa 12000
    log-adjacency-changes detail
 !
