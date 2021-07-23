@@ -200,6 +200,9 @@ resource "docker_container" "leaf-3" {
   networks_advanced {
     name = docker_network.eth13.name
   }
+  networks_advanced {
+    name = docker_network.eth14.name
+  }
   ports {
     internal = 22
     external = 2225
@@ -216,7 +219,38 @@ resource "docker_container" "leaf-3" {
   #   command = "ansible-playbook -e 'switch_name=leaf-3' ansible/apply-config-mod.yml"
   # }
 }
-
+resource "docker_container" "rtr-1" {
+  image = docker_image.ceos.latest
+  name  = "rtr-1"
+  #hostname = "ceos_test"
+  attach     = "false"
+  env        = ["container=docker", "CEOS=1", "EOS_PLATFORM=ceoslab", "SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "ETBA=1", "INTFTYPE=eth", "MGMT_INTF=eth0"]
+  command    = ["/sbin/init", "systemd.setenv=INTFTYPE=eth", "systemd.setenv=ETBA=1", "systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1", "systemd.setenv=CEOS=1", "systemd.setenv=EOS_PLATFORM=ceoslab", "systemd.setenv=container=docker", "systemd.setenv=MGMT_INTF=eth0"]
+  privileged = "true"
+  start      = "true"
+  networks_advanced {
+    name = docker_network.eth0.name
+    ipv4_address = "10.250.254.7"
+  }
+  networks_advanced {
+    name = docker_network.eth14.name
+  }
+  ports {
+    internal = 22
+    external = 2226
+  }
+  ports {
+    internal = 443
+    external = 8006
+  }
+  upload {
+    source = "${path.module}/configs/rtr-1.ios"
+    file = "/mnt/flash/startup-config"
+  }
+  # provisioner "local-exec" {
+  #   command = "ansible-playbook -e 'switch_name=leaf-3' ansible/apply-config-mod.yml"
+  # }
+}
 resource "docker_container" "host1_leaf1" {
   # The image below is alpine-based with installed network tools
   image    = docker_image.network-multitool.latest
@@ -398,5 +432,11 @@ resource "docker_network" "eth13" {
   name = "eth13"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth13.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+}
+resource "docker_network" "eth14" {
+  name = "eth14"
+  provisioner "local-exec" {
+    command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth14.id, 0, 12)}/bridge/group_fwd_mask"
   }
 }

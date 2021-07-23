@@ -59,9 +59,9 @@ interface Vlan20
    vrf prod
    ip address virtual 10.0.20.1/24
 
-interface Vlan30
-   vrf prod
-   ip address virtual 10.0.30.1/24
+! interface Vlan30
+!    vrf prod
+!    ip address virtual 10.0.30.1/24
 
 interface Vlan101
 !
@@ -94,12 +94,12 @@ router bgp 64513
       route-target both 1020:1020
       redistribute learned 
       !
-   vlan 30
-      rd 10.250.3.1:1030
-      route-target both 1030:1030
-      redistribute learned 
-      !  
-   !
+   ! vlan 30
+   !    rd 10.250.3.1:1030
+   !    route-target both 1030:1030
+   !    redistribute learned 
+   !    !  
+   ! !
    neighbor SPINE_EVPN peer group
    neighbor SPINE_EVPN update-source Loopback1
    neighbor SPINE_EVPN ebgp-multihop 3
