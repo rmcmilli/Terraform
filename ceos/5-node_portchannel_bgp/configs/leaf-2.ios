@@ -3,7 +3,7 @@
 !
 transceiver qsfp default-mode 4x10G
 !
-service routing protocols model ribd
+service routing protocols model multi-agent
 !
 hostname leaf-2
 !
@@ -13,7 +13,7 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 10,102,105
+vlan 10,20,30,102,105
 !
 !
 vrf instance prod
@@ -53,22 +53,23 @@ interface Management0
 interface Vlan10
    vrf prod
    ip address virtual 10.0.10.1/24
-!
-interface Vlan20
-   vrf prod
-   ip address virtual 10.0.20.1/24
-!
-interface Vlan30
-   vrf prod
-   ip address virtual 10.0.30.1/24
-!
+! !
+! interface Vlan20
+!    vrf prod
+!    ip address virtual 10.0.20.1/24
+! !
+! interface Vlan30
+!    vrf prod
+!    ip address virtual 10.0.30.1/24
+! !
 interface Vxlan1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10 vni 10
    vxlan vlan 20 vni 20
    vxlan vlan 30 vni 30
-   vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
+   vxlan vrf prod vni 1000
+!   vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
 !
 ip routing
 ip routing vrf prod
@@ -79,6 +80,44 @@ router bgp 64514
    network 10.250.0.0/23
    network 10.250.3.0/24
    redistribute connected
+   !
+   vlan 10
+      rd 10.250.3.2:1010
+      route-target both 1010:1010
+      redistribute learned 
+   !    !
+   ! vlan 20
+   !    rd 10.250.3.2:1020
+   !    route-target both 1020:1020
+   !    redistribute learned 
+   !    !
+   ! vlan 30
+   !    rd 10.250.3.2:1030
+   !    route-target both 1030:1030
+   !    redistribute learned 
+   !    !  
+   !
+   neighbor SPINE_EVPN peer group
+   neighbor SPINE_EVPN update-source Loopback1
+   neighbor SPINE_EVPN ebgp-multihop 3
+   neighbor SPINE_EVPN send-community extended
+   neighbor SPINE_EVPN maximum-routes 12000
+   neighbor SPINE_EVPN remote-as 64512
+   neighbor 10.250.3.4 peer group SPINE_EVPN
+   neighbor 10.250.3.5 peer group SPINE_EVPN
+   !
+   address-family evpn
+      neighbor SPINE_EVPN activate
+   !
+   address-family ipv4
+      no neighbor SPINE_EVPN activate
+   !
+   vrf prod
+      rd 10.250.3.2:1000
+      route-target import 1000:1000
+      route-target export 1000:1000
+      redistribute connected
+!
 !
 management api http-commands
    no shutdown
