@@ -43,9 +43,6 @@ interface Ethernet2
 interface Ethernet3
    channel-group 3 mode on
 !
-interface Loopback0
-   ip address 10.250.1.2/32
-!
 interface Loopback1
    ip address 10.250.3.5/32
    ip ospf area 0.0.0.0

@@ -44,8 +44,6 @@ interface Ethernet4
    switchport access vlan 10
    vrf prod
 !
-interface Loopback0
-   ip address 10.250.1.4/32
 !
 interface Loopback1
    ip address 10.250.3.2/32
