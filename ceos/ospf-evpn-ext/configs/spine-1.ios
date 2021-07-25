@@ -1,0 +1,100 @@
+! Command: show running-config
+! device: spine-1 (cEOSLab, EOS-4.22.0.1F)
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname spine-1
+!
+spanning-tree mode rapid-pvst
+!
+no aaa root
+!
+username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
+!
+vlan 101-103
+!
+interface Port-Channel1
+   no switchport
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.1/30
+!
+interface Port-Channel2
+   no switchport
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.5/30
+!
+interface Port-Channel3
+   no switchport
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.9/30
+!
+interface Ethernet1
+   channel-group 1 mode on
+!
+interface Ethernet2
+   channel-group 1 mode on
+!
+interface Ethernet3
+   channel-group 2 mode on
+!
+interface Ethernet4
+   channel-group 2 mode on
+!
+interface Ethernet5
+   channel-group 3 mode on
+!
+interface Ethernet6
+   channel-group 3 mode on
+!
+interface Loopback1
+   ip address 10.250.3.4/32
+   ip ospf area 0.0.0.0
+!
+interface Management0
+   ip address 10.250.254.2/24
+!
+ip routing
+!
+router ospf 1
+   redistribute connected
+   !network 10.250.0.0/23 area 0.0.0.0
+   max-lsa 12000
+   log-adjacency-changes detail
+!
+router bgp 64512
+!
+   neighbor LEAF_EVPN peer group
+   neighbor LEAF_EVPN update-source Loopback1
+   neighbor LEAF_EVPN ebgp-multihop 5
+   neighbor LEAF_EVPN send-community extended
+   neighbor LEAF_EVPN next-hop-unchanged
+   neighbor LEAF_EVPN maximum-routes 12000
+   neighbor 10.250.3.1 peer group LEAF_EVPN
+   neighbor 10.250.3.1 remote-as 64513
+   neighbor 10.250.3.2 peer group LEAF_EVPN
+   neighbor 10.250.3.2 remote-as 64514
+   neighbor 10.250.3.3 peer group LEAF_EVPN
+   neighbor 10.250.3.3 remote-as 64515
+   !
+   address-family evpn
+      neighbor LEAF_EVPN activate
+   !
+   address-family ipv4
+      no neighbor LEAF_EVPN activate
+   !
+   address-family ipv6
+      no neighbor LEAF_EVPN activate
+   !
+!
+management api http-commands
+   no shutdown
+!
+end
