@@ -358,7 +358,7 @@ resource "docker_container" "host5_rtr1" {
   start   = "true"
   #restart = "always"
   networks_advanced {
-    name = docker_network.eth5.name
+    name = docker_network.eth15.name
   }
   capabilities {
     add = ["NET_ADMIN"]
@@ -466,7 +466,7 @@ resource "docker_network" "eth14" {
   }
 }
 resource "docker_network" "eth15" {
-  name = "eth14"
+  name = "eth15"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth15.id, 0, 12)}/bridge/group_fwd_mask"
   }

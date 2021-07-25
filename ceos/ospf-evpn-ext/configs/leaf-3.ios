@@ -31,6 +31,10 @@ interface Port-Channel2
    ip ospf network point-to-point
 !   ip address 10.250.0.22/30
 !
+! interface Port-Channel5
+!    switchport mode trunk
+!    switchport trunk allowed vlan 200
+!
 interface Ethernet1
    channel-group 1 mode on
 !
@@ -45,8 +49,9 @@ interface Ethernet4
    vrf prod
 !
 interface Ethernet5
-   switchport trunk allowed vlan 200
+   !channel-group 5 mode on
    switchport mode trunk
+   switchport trunk allowed vlan 200
 !
 interface Loopback1
    ip address 10.250.3.3/32
@@ -64,7 +69,8 @@ interface Vlan30
 !
 interface Vlan200
    description NAT-peering-transit
-   ip address 172.16.10.1/31
+   vrf prod
+   ip address 172.16.10.1/30
 !
 interface Vxlan1
 !   vxlan multicast-group 227.10.1.1
@@ -122,7 +128,7 @@ router bgp 64515
       redistribute connected
       !
       neighbor 172.16.10.2 remote-as 64600
-      neighbor 172.16.10.2 local-as 64600
+      neighbor 172.16.10.2 local-as 64600 no-prepend replace-as fallback
    !
 !
 management api http-commands

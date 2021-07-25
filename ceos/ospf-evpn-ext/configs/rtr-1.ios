@@ -14,12 +14,14 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-interface Port-Channel1
-!
+! interface Port-Channel1
+!    switchport trunk allowed vlan 200
+!    switchport mode trunk
+
 interface Ethernet1
+   !channel-group 1 mode on
    switchport trunk allowed vlan 200
    switchport mode trunk
-!   channel-group 1 mode on
 !
 interface Ethernet2
    switchport access vlan 250
@@ -28,11 +30,12 @@ interface Ethernet2
 interface Management0
    ip address 10.250.254.7/24
 !
+!
 interface Loopback10
    ip address 4.40.8.80/32
 !
 interface Vlan200
-   ip address 172.16.10.2/31
+   ip address 172.16.10.2/30
 !
 interface Vlan250
    ip address 192.168.250.1/24
