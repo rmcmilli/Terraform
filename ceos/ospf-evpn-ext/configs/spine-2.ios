@@ -66,6 +66,7 @@ router bgp 64512
    neighbor LEAF_EVPN send-community extended
    neighbor LEAF_EVPN next-hop-unchanged
    neighbor LEAF_EVPN maximum-routes 12000
+   neighbor LEAF_EVPN bfd
    neighbor 10.250.3.1 peer group LEAF_EVPN
    neighbor 10.250.3.1 remote-as 64513
    neighbor 10.250.3.2 peer group LEAF_EVPN

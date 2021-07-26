@@ -100,6 +100,7 @@ router bgp 64514
    neighbor SPINE_EVPN send-community extended
    neighbor SPINE_EVPN maximum-routes 12000
    neighbor SPINE_EVPN remote-as 64512
+   neighbor SPINE_EVPN bfd
    neighbor 10.250.3.4 peer group SPINE_EVPN
    neighbor 10.250.3.5 peer group SPINE_EVPN
    !
