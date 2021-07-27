@@ -17,37 +17,28 @@ vlan 10
 !
 vrf instance prod
 !
-! interface Port-Channel1
-!    no switchport
-!    ip address unnumbered Loopback1
-! !   ip address 10.250.0.6/30
-!    ip ospf area 0.0.0.0
-!    ip ospf network point-to-point
+interface Port-Channel1
+   no switchport
+   ip address unnumbered Loopback1
+!   ip address 10.250.0.6/30
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
 !
-! interface Port-Channel2
-!    no switchport
-!    ip address unnumbered Loopback1
-!    ip ospf area 0.0.0.0
-!    ip ospf network point-to-point
-! !   ip address 10.250.0.18/30
+interface Port-Channel2
+   no switchport
+   ip address unnumbered Loopback1
+   ip ospf area 0.0.0.0
+   ip ospf network point-to-point
+!   ip address 10.250.0.18/30
 !
 interface Ethernet1
-   no switchport
-   ip address unnumbered Loopback1
-   ip ospf area 0.0.0.0
-   ip ospf network point-to-point
+   channel-group 1 mode on
 !
 interface Ethernet2
-   no switchport
-   ip address unnumbered Loopback1
-   ip ospf area 0.0.0.0
-   ip ospf network point-to-point
+   channel-group 1 mode on
 !
 interface Ethernet3
-   no switchport
-   ip address unnumbered Loopback1
-   ip ospf area 0.0.0.0
-   ip ospf network point-to-point
+   channel-group 2 mode on
 !
 interface Ethernet4
    switchport access vlan 10
