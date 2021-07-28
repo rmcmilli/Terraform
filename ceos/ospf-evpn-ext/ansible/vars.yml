@@ -1,0 +1,22 @@
+---
+switches:
+  spine-1:
+    switch_name: "spine-1"
+    port_number: 8001
+    host: localhost
+  spine-2:
+    switch_name: "spine-2"
+    port_number: 8002
+    host: localhost
+  leaf-1:
+    switch_name: "leaf-1"
+    port_number: 8003
+    host: localhost
+  leaf-2:
+    switch_name: "leaf-2"
+    port_number: 8004
+    host: localhost
+  leaf-3:
+    switch_name: "leaf-3"
+    port_number: 8005
+    host: localhost
