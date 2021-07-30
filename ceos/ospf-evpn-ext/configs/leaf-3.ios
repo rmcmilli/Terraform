@@ -17,11 +17,17 @@ vrf instance prod
 !
 vlan 30,200
 !
+bfd local-address 10.250.3.3
+!
 interface Port-Channel1
    no switchport
    ip address unnumbered Loopback1
    ip ospf area 0.0.0.0
    ip ospf network point-to-point
+   ip ospf hello-interval 1
+   ip ospf dead-interval 4
+   ! bfd per-link rfc-7130
+   bfd neighbor 10.250.3.4
 !   ip address 10.250.0.10/30
 !
 interface Port-Channel2
@@ -29,6 +35,10 @@ interface Port-Channel2
    ip address unnumbered Loopback1
    ip ospf area 0.0.0.0
    ip ospf network point-to-point
+   ip ospf hello-interval 1
+   ip ospf dead-interval 4
+   ! bfd per-link rfc-7130
+   bfd neighbor 10.250.3.5
 !   ip address 10.250.0.22/30
 !
 ! interface Port-Channel5
