@@ -83,7 +83,7 @@ ip routing
 !
 router ospf 100
    redistribute connected
-   !network 10.250.0.0/23 area 0.0.0.0
+   network 10.250.3.0/24 area 0.0.0.0
    max-lsa 12000
    log-adjacency-changes detail
    bfd default

@@ -52,6 +52,7 @@ interface Ethernet1
    ip ospf network point-to-point
    ip ospf hello-interval 1
    ip ospf dead-interval 4
+   pim ipv4 sparse-mode
 !
 interface Ethernet2
    no switchport
@@ -60,6 +61,7 @@ interface Ethernet2
    ip ospf network point-to-point
    ip ospf hello-interval 1
    ip ospf dead-interval 4
+   pim ipv4 sparse-mode
 !
 interface Ethernet3
    no switchport
@@ -68,15 +70,18 @@ interface Ethernet3
    ip ospf network point-to-point
    ip ospf hello-interval 1
    ip ospf dead-interval 4
+   pim ipv4 sparse-mode
 !
 interface Ethernet4
    switchport access vlan 30
    vrf prod
+   pim ipv4 sparse-mode
 !
 interface Ethernet5
    !channel-group 5 mode on
    switchport mode trunk
    switchport trunk allowed vlan 200
+   pim ipv4 sparse-mode
 !
 interface Loopback1
    ip address 10.250.3.3/32
@@ -91,11 +96,15 @@ interface Management0
 interface Vlan30
    vrf prod
    ip address virtual 10.0.30.1/24
+   ip igmp
+   pim ipv4 local-interface loopback1
 !
 interface Vlan200
    description NAT-peering-transit
    vrf prod
    ip address 172.16.10.1/30
+   ip igmp
+   pim ipv4 local-interface loopback1
 !
 interface Vxlan1
 !   vxlan multicast-group 227.10.1.1
@@ -103,10 +112,21 @@ interface Vxlan1
    vxlan udp-port 4789
    vxlan vlan 30 vni 30
    vxlan vrf prod vni 1000
+   ! vxlan vrf prod multicast group 225.1.1.1
 !   vxlan flood vtep 10.250.3.1 10.250.3.3
 !
 ip routing
 ip routing vrf prod
+!
+router multicast 
+   ipv4 
+      routing
+      software-forwarding sfe 
+   !
+   vrf prod
+      ipv4
+         routing
+!
 !
 router ospf 100
    !network 10.250.0.0/23 area 0.0.0.0

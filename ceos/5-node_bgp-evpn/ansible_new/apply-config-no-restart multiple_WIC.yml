@@ -1,0 +1,75 @@
+---
+# - name: add switches to inventory
+#   hosts: localhost
+#   connection: local
+#   vars_files: 
+#     - "{{ playbook_dir }}/vars.yml"
+#   tasks: 
+#   - debug: msg="switch is {{ item }}"
+#     with_items: "{{ switches | dict2items }}"
+
+#   - name: add "{{ item.value.switch_name }}" to inventory
+#     add_host:
+#       # name: "{{ switch_name }}"
+#       name: "{{ item.value.switch_name }}"
+#       ansible_connection: httpapi
+#       ansible_host: localhost
+#       ansible_httpapi_port: "{{ item.value.port_number }}"
+#       ansible_user: admin
+#       ansible_password: "password1!"
+#       ansible_network_os: eos
+#       ansible_command_timeout: 60
+#       ansible_host_key_checking: False
+#       ansible_httpapi_use_ssl: True
+#       ansible_httpapi_validate_certs: False
+#       ansible_become: True
+#       ansible_become_method: enable
+#       groups: created_nodes
+#     changed_when: false
+#     with_items: "{{ switches | dict2items }}"
+
+- name: Config
+  hosts: switches
+  serial: 1
+  # vars:
+  #   name: "{{ switch_name }}"
+  #   ansible_httpapi_port: "{{ port_number }}"
+  tasks:
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - debug: msg="ansible port is {{ ansible_httpapi_port }}"    
+
+    - name: load configuration on nodes
+      eos_config:
+        src: "{{ playbook_dir }}/../configs/{{ inventory_hostname }}.ios"
+        replace: 'config'
+        save_when: changed
+
+    # - debug: msg="Nodes are {{ groups.created_nodes.hosts }}"
+    # - debug: msg="inventory hostname is {{ inventory_hostname }}"
+    # - debug: msg="ansible port is {{ ansible_httpapi_port }}"
+
+    # - name: Create output directory (if missing)
+    #   file:
+    #     path: "{{playbook_dir}}/facts"
+    #     state: directory
+
+    # - name: Collect all facts from device
+    #   eos_facts:
+    #     gather_subset:
+    #       - all
+    #   register: facts
+
+    # - name: Display result
+    #   debug:
+    #     msg: "Model is {{facts.ansible_facts.ansible_net_model}} and it is running {{facts.ansible_facts.ansible_net_version}}"
+
+    # - name: copy collected configuration in configuration/text directory
+    #   copy:
+    #     content: "{{ facts.ansible_facts.ansible_net_config }}"
+    #     dest: "{{ playbook_dir }}/facts/{{ inventory_hostname }}.conf"
+
+
+
