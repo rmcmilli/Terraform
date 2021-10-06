@@ -1,0 +1,11 @@
+---
+- name: Clear
+  hosts: switches
+  # serial: 1
+  # vars:
+  #   name: "{{ switch_name }}"
+  #   ansible_httpapi_port: "{{ port_number }}"
+  tasks:
+    - name: Clear-bgp
+      eos_command:
+        commands: clear bgp *

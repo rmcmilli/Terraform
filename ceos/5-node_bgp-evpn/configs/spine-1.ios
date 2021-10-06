@@ -61,7 +61,8 @@ interface Ethernet6
 !    ip address 10.250.1.1/32
 !
 interface Loopback0
-   ip address 10.250.3.4/32
+   description evpn
+   ip address 10.250.3.254/32
 !
 interface Management0
    ip address 10.250.254.2/24

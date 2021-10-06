@@ -44,7 +44,8 @@ interface Ethernet3
 !    ip address 10.250.1.2/32
 !
 interface Loopback0
-   ip address 10.250.3.5/32
+   description evpn
+   ip address 10.250.3.253/32
 !
 interface Management0
    ip address 10.250.254.3/24
@@ -53,9 +54,9 @@ ip routing
 !
 router bgp 64512
    maximum-paths 10 ecmp 10
-   ! neighbor 10.250.0.26 remote-as 64513
+   ! neighbor 10.250.0426 remote-as 64513
    ! neighbor 10.250.0.26 allowas-in 3
-   ! neighbor 10.250.0.30 remote-as 64514
+   ! neighbor 10.250.0530 remote-as 64514
    ! neighbor 10.250.0.30 allowas-in 3
    ! neighbor 10.250.0.34 remote-as 64515
    ! neighbor 10.250.0.34 allowas-in 3
