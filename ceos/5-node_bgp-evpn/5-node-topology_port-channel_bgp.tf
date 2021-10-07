@@ -353,6 +353,11 @@ resource "docker_image" "network-multitool" {
   name = "praqma/network-multitool:latest"
   keep_locally = "true"
 }
+# Get latest host image
+resource "docker_image" "network-multitool" {
+  name = "praqma/network-multitool:extra"
+  keep_locally = "true"
+}
 resource "docker_network" "eth0" {
   name = "eth0"
   ipam_config {
