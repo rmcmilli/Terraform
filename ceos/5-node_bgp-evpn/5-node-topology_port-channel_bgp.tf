@@ -354,7 +354,7 @@ resource "docker_image" "network-multitool" {
   keep_locally = "true"
 }
 # Get latest host image
-resource "docker_image" "network-multitool:extra" {
+resource "docker_image" "network-multitool_extra" {
   name = "praqma/network-multitool:extra"
   keep_locally = "true"
 }
