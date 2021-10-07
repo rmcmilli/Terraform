@@ -254,7 +254,7 @@ resource "docker_container" "rtr-1" {
 resource "docker_container" "host1_leaf1" {
   # The image below is alpine-based with installed network tools
   # image    = docker_image.network-multitool.latest
-  image    = docker_image.network-multitool.extra
+  image    = docker_image.network-multitool.latest
   name     = "host1_leaf1"
   hostname = "host1_leaf1"
   attach   = "false"
@@ -277,7 +277,7 @@ resource "docker_container" "host1_leaf1" {
 resource "docker_container" "host2_leaf1" {
   # The image below is alpine-based with installed network tools
   # image    = docker_image.network-multitool.latest
-  image    = docker_image.network-multitool.extra
+  image    = docker_image.network-multitool.latest
   name     = "host2_leaf1"
   hostname = "host2_leaf1"
   attach   = "false"
@@ -300,7 +300,7 @@ resource "docker_container" "host2_leaf1" {
 resource "docker_container" "host3_leaf2" {
   # The image below is alpine-based with installed network tools
   # image    = docker_image.network-multitool.latest
-  image    = docker_image.network-multitool.extra
+  image    = docker_image.network-multitool.latest
   name     = "host3_leaf2"
   hostname = "host3_leaf2"
   attach   = "false"
@@ -323,7 +323,7 @@ resource "docker_container" "host3_leaf2" {
 resource "docker_container" "host4_leaf3" {
   # The image below is alpine-based with installed network tools
   # image    = docker_image.network-multitool.latest
-  image    = docker_image.network-multitool.extra
+  image    = docker_image.network-multitool.latest
   name     = "host4_leaf3"
   hostname = "host4_leaf3"
   attach   = "false"
