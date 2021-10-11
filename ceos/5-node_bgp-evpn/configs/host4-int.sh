@@ -5,7 +5,7 @@ ip route add default via 10.0.30.1 dev eth0
 #This turns off tcp checksum checking
 ethtool --offload eth0 rx off tx off
 # adjusting mtu
-ip li set mtu 9000 dev eth0
+# ip li set mtu 9000 dev eth0
 # Create file for testing transfers
 head -c 1073741824 </dev/urandom >myfile
 #This makes it so the container doesn't stop
