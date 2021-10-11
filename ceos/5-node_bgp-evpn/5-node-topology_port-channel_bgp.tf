@@ -370,17 +370,29 @@ resource "docker_network" "eth01" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth01.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
+  }
 }
 resource "docker_network" "eth02" {
   name = "eth02"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth02.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
   }
+}
 resource "docker_network" "eth03" {
   name = "eth03"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth03.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
   }
 }
 resource "docker_network" "eth04" {
@@ -388,11 +400,19 @@ resource "docker_network" "eth04" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth04.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
+  }
 }
 resource "docker_network" "eth05" {
   name = "eth05"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth05.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
   }
 }
 resource "docker_network" "eth06" {
@@ -400,11 +420,19 @@ resource "docker_network" "eth06" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth06.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
+  }
 }
 resource "docker_network" "eth07" {
   name = "eth07"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth07.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
   }
 }
 resource "docker_network" "eth08" {
@@ -412,11 +440,19 @@ resource "docker_network" "eth08" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth08.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
+  }
 }
 resource "docker_network" "eth09" {
   name = "eth09"
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth09.id, 0, 12)}/bridge/group_fwd_mask"
+  }
+  driver = "bridge"
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
   }
 }
 resource "docker_network" "eth10" {
@@ -424,6 +460,10 @@ resource "docker_network" "eth10" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth10.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  driver = "bridge"
+  # options = {
+  #   "com.docker.network.driver.mtu" = "9214"
+  # }
 }
 resource "docker_network" "eth11" {
   name = "eth11"
@@ -442,6 +482,10 @@ resource "docker_network" "eth13" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth13.id, 0, 12)}/bridge/group_fwd_mask"
   }
+  # driver = "bridge"
+  # options = {
+  #   "com.docker.network.driver.mtu" = "9214"
+  # }
 }
 resource "docker_network" "eth14" {
   name = "eth14"

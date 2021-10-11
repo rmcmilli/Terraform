@@ -31,31 +31,37 @@ interface Ethernet1
    ! channel-group 1 mode on
    no switchport
    ip address 10.250.0.1/30
+   mtu 1550
 !
 interface Ethernet2
    ! channel-group 1 mode on
    no switchport
    ip address 10.250.0.5/30
+   mtu 1550
 !
 interface Ethernet3
    ! channel-group 2 mode on
    no switchport
    ip address 10.250.0.9/30
+   mtu 1550
 !
 interface Ethernet4
    ! channel-group 2 mode on
    no switchport
    ip address 10.250.0.13/30
+   mtu 1550
 !
 interface Ethernet5
    ! channel-group 3 mode on
    no switchport
    ip address 10.250.0.17/30
+   mtu 1550
 !
 interface Ethernet6
    ! channel-group 3 mode on
    no switchport
    ip address 10.250.0.21/30
+   mtu 1550
 !
 ! interface Loopback0
 !    ip address 10.250.1.1/32

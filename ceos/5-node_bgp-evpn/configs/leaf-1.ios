@@ -29,16 +29,19 @@ interface Ethernet1
    ! channel-group 1 mode on
    no switchport
    ip address 10.250.0.2/30
+   mtu 1550
 !
 interface Ethernet2
    ! channel-group 1 mode on
    no switchport
    ip address 10.250.0.6/30
+   mtu 1550
 !
 interface Ethernet3
    ! channel-group 2 mode on
    no switchport
    ip address 10.250.0.26/30
+   mtu 1550
 !
 interface Ethernet4
    switchport access vlan 10
@@ -57,7 +60,7 @@ interface Loopback1
    ip address 10.250.1.1/32
    ip address 10.250.1.254/32 secondary
 !
-ip virtual-router mac-address 00:00:11:11:22:22
+ip virtual-router mac-address 00:11:11:22:22:33
 !
 interface Management0
    ip address 10.250.254.4/24
