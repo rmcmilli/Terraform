@@ -11,6 +11,17 @@ spanning-tree mode rapid-pvst
 !
 no aaa root
 !
+router multicast
+   ipv4
+      routing
+      software-forwarding sfe
+!
+sflow run
+sflow destination 10.250.254.100
+sflow source-interface Management0
+sflow extension bgp 
+!
+!
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
 ! interface Port-Channel1
@@ -30,18 +41,21 @@ interface Ethernet1
    no switchport
    ip address 10.250.0.25/30
    mtu 1550
+   pim ipv4 sparse-mode
 !
 interface Ethernet2
    ! channel-group 2 mode on
    no switchport
    ip address 10.250.0.29/30
    mtu 1550
+   pim ipv4 sparse-mode
 !
 interface Ethernet3
    ! channel-group 3 mode on
    no switchport
    ip address 10.250.0.33/30
    mtu 1550
+   pim ipv4 sparse-mode
 !
 ! interface Loopback0
 !    ip address 10.250.1.2/32
@@ -102,6 +116,10 @@ router bgp 64512
    !
    address-family ipv6
       no neighbor LEAF_EVPN activate
+   !
+   ! address-family ipv4 multicast
+   !    neighbor LEAF_UNDERLAY activate
+   !    redistribute attached-host 
    !
 !
 management api http-commands

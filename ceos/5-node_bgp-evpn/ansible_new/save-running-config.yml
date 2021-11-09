@@ -11,7 +11,7 @@
       ansible_httpapi_port: "{{ port_number }}"
       transport: eapi
       ansible_user: admin
-      ansible_password: "password1!"
+      ansible_password: "password1"
       ansible_network_os: eos
       ansible_command_timeout: 45
       ansible_host_key_checking: False

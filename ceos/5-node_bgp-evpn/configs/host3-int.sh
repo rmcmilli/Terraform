@@ -8,5 +8,7 @@ ethtool --offload eth0 rx off tx off
 # ip li set mtu 9000 dev eth0
 # Create file for testing transfers
 head -c 1073741824 </dev/urandom >myfile
+# multicast
+ip addr add 224.10.10.10/24 dev eth0 autojoin
 #This makes it so the container doesn't stop
 tail -f /dev/null

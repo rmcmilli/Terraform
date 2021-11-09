@@ -1,4 +1,5 @@
 ! Command: show running-config
+! device: rtr-1 (cEOSLab, EOS-4.26.1F-22602519.4261F (engineering build))
 !
 transceiver qsfp default-mode 4x10G
 !
@@ -8,15 +9,35 @@ hostname rtr-1
 !
 spanning-tree mode rapid-pvst
 !
+sflow run
+sflow destination 10.250.254.100
+sflow source-interface Management0
+sflow extension bgp 
+!
+!
+router multicast
+   ipv4
+      routing
+      software-forwarding sfe
+!
+router pim sparse-mode
+   ipv4
+      ip pim rp-address 172.16.2.1 
 no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-interface Port-Channel1
-    ip address 172.16.1.1/30
+! interface Port-Channel1
+!     ip address 172.16.1.1/30
 !
 interface Ethernet1
-   channel-group 1 mode on
+   ! channel-group 1 mode on
+   ip address 172.16.1.1/30
+   no switchport
+   ip pim sparse-mode
+!
+interface Loopback1
+   ip address 172.16.2.1/32
 !
 interface Management0
    ip address 10.250.254.7/24

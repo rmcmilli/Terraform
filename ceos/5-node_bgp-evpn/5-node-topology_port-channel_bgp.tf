@@ -1,4 +1,13 @@
 # Configure the Docker provider
+terraform {
+  required_providers {
+    docker = {
+      source = "kreuzwerker/docker"
+      version = "2.15.0"
+    }
+  }
+}
+
 provider "docker" {
   #    host = "tcp://127.0.0.1:2376"
   host = "unix:///var/run/docker.sock"
@@ -159,6 +168,9 @@ resource "docker_container" "leaf-2" {
   networks_advanced {
     name = docker_network.eth12.name
   }
+  # networks_advanced {
+  #   name = docker_network.eth14.name
+  # }
   ports {
     internal = 22
     external = 2224
@@ -273,6 +285,11 @@ resource "docker_container" "host1_leaf1" {
   capabilities {
     add = ["NET_ADMIN"]
   }
+  # enable multicast
+  sysctls = {
+    "net.ipv4.icmp_echo_ignore_broadcasts"="0"
+    "net.ipv4.conf.all.rp_filter"="0"
+  }
 }
 resource "docker_container" "host2_leaf1" {
   # The image below is alpine-based with installed network tools
@@ -295,6 +312,11 @@ resource "docker_container" "host2_leaf1" {
   }
   capabilities {
     add = ["NET_ADMIN"]
+  }
+  # enable multicast
+  sysctls = {
+    "net.ipv4.icmp_echo_ignore_broadcasts"="0"
+    "net.ipv4.conf.all.rp_filter"="0"
   }
 }
 resource "docker_container" "host3_leaf2" {
@@ -319,6 +341,11 @@ resource "docker_container" "host3_leaf2" {
   capabilities {
     add = ["NET_ADMIN"]
   }
+  # enable multicast
+  sysctls = {
+    "net.ipv4.icmp_echo_ignore_broadcasts"="0"
+    "net.ipv4.conf.all.rp_filter"="0"
+  }
 }
 resource "docker_container" "host4_leaf3" {
   # The image below is alpine-based with installed network tools
@@ -342,6 +369,61 @@ resource "docker_container" "host4_leaf3" {
   capabilities {
     add = ["NET_ADMIN"]
   }
+  # enable multicast
+  sysctls = {
+    "net.ipv4.icmp_echo_ignore_broadcasts"="0"
+    "net.ipv4.conf.all.rp_filter"="0"
+  }
+}
+resource "docker_container" "sflow-rt_leaf2" {
+  image = docker_image.sflow.latest
+  name = "sflow_host_leaf2"
+  hostname = "sflow_host_leaf2"
+  attach = "false"
+  logs = "true"
+  command = ["-Dviz.maxVolume=100000","-Dsnmp.ifname=yes","-Dsystem.propertyFiles=particle.conf"]
+  start = "true"
+  networks_advanced {
+    name = docker_network.eth0.name
+    ipv4_address = "10.250.254.100"
+  }
+  ports {
+    internal = 8008
+    external = 18008
+  }
+  ports {
+    internal = 6343
+    protocol = "udp"
+  }
+  # upload {
+  #   file = "/sflow-rt/store/vizceral~traffic.js/groups"
+  #   source = "${path.module}/sflow-container/groups.json"
+  # }
+  # upload {
+  #   file = "/sflow-rt/particle.conf"
+  #   source = "${path.module}/sflow-container/particle.conf"
+  # }
+  # upload {
+  #   file = "/sflow-rt/store/fabric-view~fabric-view-stats.js/groups"
+  #   source = "${path.module}/sflow-container/fabric-view-stats.js"
+  # }
+  # upload {
+  #   file = "/sflow-rt/store/fabric-view~fabric-view-elephants.js/groups"
+  #   source = "${path.module}/sflow-container/fabric-view-elephants.js"
+  # }
+  # upload {
+  #   file = "/sflow-rt/store/fabric-view~fabric-view-usr.js/groups"
+  #   source = "${path.module}/sflow-container/fabric-view-usr.js"
+  # }
+  # upload {
+  #   file = "/sflow-rt/store/fabric-view~fabric-view.js/groups"
+  #   source = "${path.module}/sflow-container/fabric-view.js"
+  # }
+  # volumes {
+  #   container_path = "/sflow-rt/store"
+  #   # host_path = "${path.module}/sflow-container/store"
+  #   host_path = "/home/rmcmillian/documents/git/Terraform/ceos/5-node_bgp-evpn/sflow-container/store"
+  # }
 }
 # Get latest ceos image
 resource "docker_image" "ceos" {
@@ -358,11 +440,23 @@ resource "docker_image" "network-multitool" {
   name = "praqma/network-multitool:extra"
   keep_locally = "true"
 }
+resource "docker_image" "sflow" {
+  name = "sflow-rt"
+  build {
+    path = "."
+    tag = ["sflow-rt:latest"]
+    dockerfile = "${path.module}/sflow-container/Dockerfile"
+  }
+  keep_locally = "false"
+}
 resource "docker_network" "eth0" {
   name = "eth0"
   ipam_config {
     subnet = "10.250.254.0/24"
     gateway = "10.250.254.1"
+  }
+  options = {
+    "com.docker.network.driver.mtu" = "1550"
   }
 }
 resource "docker_network" "eth01" {  
@@ -460,7 +554,7 @@ resource "docker_network" "eth10" {
   provisioner "local-exec" {
     command = "echo 16384 | sudo tee -a /sys/class/net/br-${substr(docker_network.eth10.id, 0, 12)}/bridge/group_fwd_mask"
   }
-  driver = "bridge"
+  # driver = "bridge"
   # options = {
   #   "com.docker.network.driver.mtu" = "9214"
   # }

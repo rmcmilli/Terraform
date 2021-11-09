@@ -1,0 +1,139 @@
+{
+    "nodes": {
+        "spine-1": {
+          "agent": "10.250.254.2",
+          "ports": {
+        "ethernet1": {
+              "ifindex": "1"
+        },
+        "ethernet2": {
+              "ifindex": "2"
+            },
+        "ethernet3": {
+              "ifindex": "3"
+            },
+        "ethernet4": {
+              "ifindex": "4"
+            },
+        "ethernet5": {
+              "ifindex": "5"
+            },
+        "ethernet6": {
+              "ifindex": "6"
+            }
+          }
+        },
+        "spine-2": {
+          "agent": "10.250.254.3",
+          "ports": {
+        "ethernet1": {
+              "ifindex": "1"
+        },
+        "ethernet2": {
+              "ifindex": "2"
+            },
+        "ethernet3": {
+              "ifindex": "3"
+            }
+          }
+        },
+        "leaf-1": {
+          "agent": "10.250.254.4",
+          "ports": {
+        "ethernet1": {
+              "ifindex": "1"
+        },
+        "ethernet2": {
+              "ifindex": "2"
+            },
+        "ethernet3": {
+              "ifindex": "3"
+            }
+          }
+        },
+        "leaf-2": {
+          "agent": "10.250.254.5",
+          "ports": {
+        "ethernet1": {
+              "ifindex": "1"
+        },
+        "ethernet2": {
+              "ifindex": "2"
+            },
+        "ethernet3": {
+              "ifindex": "3"
+            }
+          }
+        },
+        "leaf-3": {
+          "agent": "10.250.254.6",
+          "ports": {
+        "ethernet1": {
+              "ifindex": "1"
+        },
+        "ethernet2": {
+              "ifindex": "2"
+            },
+        "ethernet3": {
+              "ifindex": "3"
+            }
+          }
+        }
+    },
+    "links":{
+        "link1": {
+            "node1": "spine-1",
+            "port1": "ethernet1",
+            "node2": "leaf-1",
+            "port2": "ethernet1"
+        },
+        "link2": {
+            "node1": "spine-1",
+            "port1": "ethernet2",
+            "node2": "leaf-1",
+            "port2": "ethernet2"
+        },
+        "link3": {
+            "node1": "spine-1",
+            "port1": "ethernet3",
+            "node2": "leaf-2",
+            "port2": "ethernet1"
+        },
+        "link4": {
+            "node1": "spine-1",
+            "port1": "ethernet4",
+            "node2": "leaf-2",
+            "port2": "ethernet2"
+        },
+        "link5": {
+            "node1": "spine-1",
+            "port1": "ethernet5",
+            "node2": "leaf-3",
+            "port2": "ethernet1"
+        },
+        "link6": {
+            "node1": "spine-1",
+            "port1": "ethernet6",
+            "node2": "leaf-3",
+            "port2": "ethernet2"
+        },
+        "link7": {
+            "node1": "spine-2",
+            "port1": "ethernet1",
+            "node2": "leaf-1",
+            "port2": "ethernet3"
+        },
+        "link8": {
+            "node1": "spine-2",
+            "port1": "ethernet2",
+            "node2": "leaf-2",
+            "port2": "ethernet3"
+        },
+        "link9": {
+            "node1": "spine-2",
+            "port1": "ethernet3",
+            "node2": "leaf-3",
+            "port2": "ethernet3"
+        }
+    }
+}

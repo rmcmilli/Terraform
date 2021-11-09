@@ -7,82 +7,54 @@ service routing protocols model multi-agent
 !
 hostname spine-1
 !
+sflow destination 10.250.254.100
+sflow source-interface Management0
+sflow extension bgp
+sflow run
+!
 spanning-tree mode rapid-pvst
 !
 no aaa root
 !
-username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
-!
-sflow run
-sflow destination 10.250.254.100
-sflow source-interface Management0
-sflow extension bgp 
+username admin role network-admn secret sha512 $6$ugKSPeDlaMYOBPGM$XLxWrkWH/G4WJDA2UuZNoElGTK9ZLOBGZkAredWkPkvheG/lXDL18TYjiJ6U2cie0vVPrBvqyX1r5fqnQYmEb/
 !
 vlan 101-103
 !
-router multicast
-   ipv4
-      routing
-      software-forwarding sfe
-!
-         !
-!
-! interface Port-Channel1
-!    no switchport
-!    ip address 10.250.0.1/30
-! !
-! interface Port-Channel2
-!    no switchport
-!    ip address 10.250.0.5/30
-! !
-! interface Port-Channel3
-!    no switchport
-!    ip address 10.250.0.9/30
-!
 interface Ethernet1
-   ! channel-group 1 mode on
+   mtu 1550
    no switchport
    ip address 10.250.0.1/30
-   mtu 1550
    pim ipv4 sparse-mode
 !
 interface Ethernet2
-   ! channel-group 1 mode on
+   mtu 1550
    no switchport
    ip address 10.250.0.5/30
-   mtu 1550
    pim ipv4 sparse-mode
 !
 interface Ethernet3
-   ! channel-group 2 mode on
+   mtu 1550
    no switchport
    ip address 10.250.0.9/30
-   mtu 1550
    pim ipv4 sparse-mode
 !
 interface Ethernet4
-   ! channel-group 2 mode on
+   mtu 1550
    no switchport
    ip address 10.250.0.13/30
-   mtu 1550
    pim ipv4 sparse-mode
 !
 interface Ethernet5
-   ! channel-group 3 mode on
+   mtu 1550
    no switchport
    ip address 10.250.0.17/30
-   mtu 1550
    pim ipv4 sparse-mode
 !
 interface Ethernet6
-   ! channel-group 3 mode on
+   mtu 1550
    no switchport
    ip address 10.250.0.21/30
-   mtu 1550
    pim ipv4 sparse-mode
-!
-! interface Loopback0
-!    ip address 10.250.1.1/32
 !
 interface Loopback0
    description evpn
@@ -94,22 +66,19 @@ interface Management0
 ip routing
 !
 router bgp 64512
-   ! neighbor 10.250.0.2 remote-as 64513
-   ! neighbor 10.250.0.2 allowas-in 3
-   ! neighbor 10.250.0.6 remote-as 64514
-   ! neighbor 10.250.0.6 allowas-in 3
-   ! neighbor 10.250.0.10 remote-as 64515
-   ! neighbor 10.250.0.10 allowas-in 3
-   ! neighbor 10.250.1.2 remote-as 64512
    maximum-paths 10 ecmp 10
-   network 10.250.0.0/23
-   redistribute connected
-   !
+   neighbor LEAF_EVPN peer group
+   neighbor LEAF_EVPN next-hop-unchanged
+   neighbor LEAF_EVPN update-source Loopback0
+   neighbor LEAF_EVPN bfd
+   neighbor LEAF_EVPN ebgp-multihop 5
+   neighbor LEAF_EVPN send-community extended
+   neighbor LEAF_EVPN maximum-routes 12000
    neighbor LEAF_UNDERLAY peer group
-   neighbor LEAF_UNDERLAY allowas-in 3
-   neighbor LEAF_UNDERLAY bfd
-   neighbor LEAF_UNDERLAY ebgp-multihop 5
    neighbor LEAF_UNDERLAY next-hop-unchanged
+   neighbor LEAF_UNDERLAY bfd
+   neighbor LEAF_UNDERLAY allowas-in 3
+   neighbor LEAF_UNDERLAY ebgp-multihop 5
    neighbor 10.250.0.2 peer group LEAF_UNDERLAY
    neighbor 10.250.0.2 remote-as 64513
    neighbor 10.250.0.6 peer group LEAF_UNDERLAY
@@ -122,20 +91,13 @@ router bgp 64512
    neighbor 10.250.0.18 remote-as 64515
    neighbor 10.250.0.22 peer group LEAF_UNDERLAY
    neighbor 10.250.0.22 remote-as 64515
-   !
-   neighbor LEAF_EVPN peer group
-   neighbor LEAF_EVPN update-source Loopback0
-   neighbor LEAF_EVPN ebgp-multihop 5
-   neighbor LEAF_EVPN send-community extended
-   neighbor LEAF_EVPN next-hop-unchanged
-   neighbor LEAF_EVPN maximum-routes 12000
-   neighbor LEAF_EVPN bfd
    neighbor 10.250.3.1 peer group LEAF_EVPN
    neighbor 10.250.3.1 remote-as 64513
    neighbor 10.250.3.2 peer group LEAF_EVPN
    neighbor 10.250.3.2 remote-as 64514
    neighbor 10.250.3.3 peer group LEAF_EVPN
    neighbor 10.250.3.3 remote-as 64515
+   redistribute connected
    !
    address-family evpn
       neighbor LEAF_EVPN activate
@@ -143,14 +105,15 @@ router bgp 64512
    address-family ipv4
       no neighbor LEAF_EVPN activate
       neighbor LEAF_UNDERLAY activate
+      network 10.250.0.0/23
    !
    address-family ipv6
       no neighbor LEAF_EVPN activate
-   !
-   ! address-family ipv4 multicast
-   !    neighbor LEAF_UNDERLAY activate
-   !    redistribute attached-host 
-   !
+!
+router multicast
+   ipv4
+      routing
+      software-forwarding sfe
 !
 management api http-commands
    no shutdown

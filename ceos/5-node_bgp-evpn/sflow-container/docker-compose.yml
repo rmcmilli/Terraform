@@ -1,0 +1,16 @@
+---
+version: '3.6'
+services:
+  sflow:
+    build: .
+    volumes:
+      - $PWD/groups.json:/sflow-rt/store/vizceral~traffic.js/groups
+      - $PWD/store:/sflow-rt/store
+      - $PWD/particle.conf:/sflow-rt/particle.conf
+    ports:
+      - "6343:6343/udp"
+      - "8008:8008"
+    command: 
+      - -Dviz.maxVolume=100000
+      - -Dsnmp.ifname=yes
+      - -Dsystem.propertyFiles=particle.conf

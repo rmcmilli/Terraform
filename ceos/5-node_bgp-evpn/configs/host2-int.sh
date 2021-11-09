@@ -6,5 +6,7 @@ ip route add default via 10.0.20.1 dev eth0
 ethtool --offload eth0 rx off tx off
 # reducing mtu
 # ip li set mtu 9000 dev eth0
+# multicast
+ip addr add 224.10.10.10/24 dev eth0 autojoin
 #This makes it so the container doesn't stop
 tail -f /dev/null

@@ -13,7 +13,31 @@ no aaa root
 !
 username admin role network-admin secret sha512 $6$ZCaMVZyLNP47AhUQ$t2WBWdbjUpr7jQhwNmo.3a3AOPyov.5hXWU9woo1AZJSOKqVLWrIMiBFY2vNcV2rDvLTJXm57Uo.Vdk0idgum1
 !
-vlan 10,20,30,101,104
+sflow run
+sflow destination 10.250.254.100
+sflow source-interface Management0
+sflow extension bgp 
+!
+vlan 10,20,101,104
+!
+router multicast
+   ipv4
+      routing
+      software-forwarding sfe
+!
+router multicast
+   vrf prod
+      ipv4
+         routing
+!
+router pim sparse-mode 
+   !
+   vrf prod
+      ipv4
+         ! ip pim rp-address 10.0.10.1 override
+         ! ip pim rp-address 172.16.2.1 override
+         !
+!
 !
 vrf instance prod
 !
@@ -30,25 +54,30 @@ interface Ethernet1
    no switchport
    ip address 10.250.0.2/30
    mtu 1550
+   ip pim sparse-mode
 !
 interface Ethernet2
    ! channel-group 1 mode on
    no switchport
    ip address 10.250.0.6/30
    mtu 1550
+   ip pim sparse-mode
 !
 interface Ethernet3
    ! channel-group 2 mode on
    no switchport
    ip address 10.250.0.26/30
    mtu 1550
+   ip pim sparse-mode
 !
 interface Ethernet4
    switchport access vlan 10
+   ip igmp
 !
 interface Ethernet5
    switchport access vlan 20
-!
+   ip igmp
+!  
 !
 interface Loopback0
    description evpn 
@@ -60,6 +89,11 @@ interface Loopback1
    ip address 10.250.1.1/32
    ip address 10.250.1.254/32 secondary
 !
+interface Loopback2
+   description multicast borrow address
+   vrf prod
+   ip address 10.0.90.1/32
+! !
 ip virtual-router mac-address 00:11:11:22:22:33
 !
 interface Management0
@@ -68,24 +102,40 @@ interface Management0
 interface Vlan10
    vrf prod
    ip address virtual 10.0.10.1/24
+   ! ip address 10.0.10.254/24
+   ! ip virtual-router address 10.0.10.1
+   ! pim ipv4 dr-priority 15
+   pim ipv4 local-interface Loopback2
+   pim ipv4 sparse-mode
+   ! ip multicast source route export
 !
 interface Vlan20
    vrf prod
    ip address virtual 10.0.20.1/24
+   ! ip address 10.0.20.254/24
+   ! ip virtual-router address 10.0.20.1
+   pim ipv4 sparse-mode
+   ! ip multicast source route export
+   pim ipv4 local-interface Loopback2
 
 ! interface Vlan30
 !    vrf prod
 !    ip address virtual 10.0.30.1/24
-
-interface Vlan101
+!    pim ipv4 sparse-mode
+!    ip multicast source route export
+!    pim ipv4 local-interface Loopback2
 !
 interface Vxlan1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10 vni 10
+   vxlan vlan 10 multicast group 225.1.1.10
    vxlan vlan 20 vni 20
-   vxlan vlan 30 vni 30
+   vxlan vlan 20 multicast group 225.1.1.20
+   ! vxlan vlan 30 vni 30
+   ! vxlan vlan 30 multicast group 225.1.1.30
    vxlan vrf prod vni 1000
+   ! vxlan multicast-group 239.10.10.10
 !   vxlan flood vtep 10.250.3.1 10.250.3.2 10.250.3.3
 !
 ip routing
@@ -111,11 +161,13 @@ router bgp 64513
       rd 10.250.1.1:1010
       route-target both 1010:1010
       redistribute learned 
+      redistribute igmp
       !
    vlan 20
       rd 10.250.1.1:1020
       route-target both 1020:1020
-      redistribute learned 
+      redistribute learned
+      redistribute igmp 
       !
    ! vlan 30
    !    rd 10.250.3.1:1030
@@ -140,8 +192,13 @@ router bgp 64513
       no neighbor SPINE_EVPN activate
       neighbor SPINE_UNDERLAY activate
    !
+   ! address-family ipv4 multicast
+   !    neighbor SPINE_UNDERLAY activate
+   !    redistribute attached-host 
+   !
    vrf prod
       rd 10.250.1.1:1000
+      evpn multicast
       route-target import evpn 1000:1000
       route-target export evpn 1000:1000
       redistribute connected
